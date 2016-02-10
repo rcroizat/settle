@@ -1,3 +1,3 @@
-cd settle
-npm install
-nodemon settle
+cd settle<br>
+npm install<br>
+nodemon settle<br>
