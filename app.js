@@ -13,6 +13,13 @@ var map = require('./routes/map');
 
 var app = express();
 
+// var app = {};
+app.server = require('./server')();
+app.server.create();
+
+app.socket = require('./socket')(app);
+app.socket.create();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
