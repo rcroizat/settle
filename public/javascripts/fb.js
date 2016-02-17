@@ -76,3 +76,15 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+
+  function lala(){
+    FB.api(
+      "/{user-id}/picture",
+      function (response) {
+        if (response && !response.error) {
+          this.innerHTML = 'kk';
+          /* handle the result */
+        }
+      }
+  );
+  }
