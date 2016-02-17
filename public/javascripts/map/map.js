@@ -4,21 +4,17 @@ if (document.location.hostname == "localhost") {
     url = 'localhost';
 }
 
-var socket = io.connect(url + ':8080/');
+var map = {};
+map.maxDistance = 500;
+map.socket = io.connect(url + ':8080/');
 
-socket.on('chatRoomGet', function(data) {
-    console.log('chatRoomGet');
-    console.log(data);
+map.socket.on('chatRoomGet', function(data) {
     map.setChatRoomsList(data);
 });
 
-// On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
-socket.emit('chatRoomGet');
-
-var map = {};
-map.maxDistance = 1000;
-
 map.init = function() {
+
+  console.log(this);
 
     map.instance = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
@@ -31,6 +27,7 @@ map.init = function() {
         navigator.geolocation.getCurrentPosition(function(position) {
 
             map.userPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.userLol = "lol";
 
             var pos = {
                 lat: position.coords.latitude,
@@ -46,6 +43,8 @@ map.init = function() {
 
             map.instance.setCenter(pos);
 
+            map.socket.emit('chatRoomGet');
+
         }, function() {
             this.handleLocationError(true, infoWindow, map.instance.getCenter());
         });
@@ -56,13 +55,18 @@ map.init = function() {
 }
 
 map.setChatRoomsList = function(chatRooms) {
+
+    console.log(this.userPosition);
+    console.log(this.userLol);
+
     for (i = 0; i < chatRooms.length; i++) {
 
         chatRooms[i].position = new google.maps.LatLng(chatRooms[i].latitude, chatRooms[i].longitude);
-        chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(map.userPosition, chatRooms[i].position));
 
-        if (chatRooms[i].distance < map.maxDistance) {
-            $('#chatRoomList').append('<div id="chatRoom' + i + '" class="chatRoom"><span class="name">' + chatRooms[i].name + '</span><span class="users">' + chatRooms[i].users + '</span><div class="clear"></div></div>');
+        chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(this.userPosition, chatRooms[i].position));
+
+        if (chatRooms[i].distance < this.maxDistance) {
+            $('#chatRoomList').append('<div id="chatRoom' + i + '" class="chatRoom"><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div>');
         }
     }
 }
