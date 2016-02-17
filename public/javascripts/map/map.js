@@ -1,68 +1,20 @@
 // Connexion à socket.io
 var url = 'http://super-chat-alaurelut.c9users.io';
-if (document.location.hostname == "localhost"){
-  url = 'localhost';
+if (document.location.hostname == "localhost") {
+    url = 'localhost';
 }
 
-var socket = io.connect(url+':8080/');
-
-// // On demande le pseudo, on l'envoie au serveur et on l'affiche dans le titre
-// var pseudo = prompt('Quel est votre pseudo ?');
-// socket.emit('nouveau_client', pseudo);
-// document.title = pseudo + ' - ' + document.title;
-
-// // Quand on reçoit un message, on l'insère dans la page
-// socket.on('message', function(data) {
-//     insereMessage(data.date, data.pseudo, data.message)
-// });
-
-// socket.on('isTyping', function(pseudo) {
-//     console.log(pseudo + ' is typing');
-// });
-
-// socket.on('userDeconnection', function(id) {
-//     $('#' + id).remove();
-// });
-
-
-// // Quand un nouveau client se connecte, on affiche l'information
-// socket.on('nouveau_client', function(data) {
-//     var pseudo = data.pseudo;
-//     var users = data.users;
-//     $('#zone_users').empty();
-//     for (var i = 0; i < users.length; i++) {
-//         $('#zone_users').append('<li id=' + users[i].id + '>' + users[i].pseudo + ' </li>');
-//     };
-//     $('#zone_chat').prepend('<p><em>' + pseudo + ' a rejoint le Chat !</em></p>');
-// })
-
-// // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
-// $('#formulaire_chat').submit(function() {
-
-//     var message = $('#message').val();
-
-//     if (message !== '') {
-//         socket.emit('message', message); // Transmet le message aux autres
-//         $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-//     }
-
-//     return false; // Permet de bloquer l'envoi "classique" du formulaire
-// });
-
-// $("#message").keydown(function() {
-//     socket.emit('isTyping'); // Istyping
-// });
-
-// // Ajoute un message dans la page
-// function insereMessage(date, pseudo, message) {
-//     console.log('insere Message');
-//     $('#zone_chat').prepend('<p><span>' + date + '</span> <strong>' + pseudo + '</strong> ' + message + '</p>');
-// }
-
-
 var map = {};
+map.maxDistance = 500;
+map.socket = io.connect(url + ':8080/');
+
+map.socket.on('chatRoomGet', function(data) {
+    map.setChatRoomsList(data);
+});
 
 map.init = function() {
+
+  console.log(this);
 
     map.instance = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
@@ -74,7 +26,8 @@ map.init = function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
 
-            var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.userPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.userLol = "lol";
 
             var pos = {
                 lat: position.coords.latitude,
@@ -82,16 +35,16 @@ map.init = function() {
             };
 
             var marker = new google.maps.Marker({
-                position: myLatlng,
+                position: map.userPosition,
                 map: map.instance,
-                icon: "public/img/map/pin.svg",
+                icon: "img/map/pin.svg",
                 size: new google.maps.Size(32, 32)
             });
 
-
-            // infoWindow.setPosition(pos);
-            // infoWindow.setContent('Location found.');
             map.instance.setCenter(pos);
+
+            map.socket.emit('chatRoomGet');
+
         }, function() {
             this.handleLocationError(true, infoWindow, map.instance.getCenter());
         });
@@ -101,8 +54,21 @@ map.init = function() {
     }
 }
 
-map.getChatRoom = function() {
+map.setChatRoomsList = function(chatRooms) {
 
+    console.log(this.userPosition);
+    console.log(this.userLol);
+
+    for (i = 0; i < chatRooms.length; i++) {
+
+        chatRooms[i].position = new google.maps.LatLng(chatRooms[i].latitude, chatRooms[i].longitude);
+
+        chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(this.userPosition, chatRooms[i].position));
+
+        if (chatRooms[i].distance < this.maxDistance) {
+            $('#chatRoomList').append('<div id="chatRoom' + i + '" class="chatRoom"><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div>');
+        }
+    }
 }
 
 function initMap() {
