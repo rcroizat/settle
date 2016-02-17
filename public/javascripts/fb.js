@@ -1,7 +1,19 @@
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
+
+    FB.api("/"+response.authResponse.userID+"/picture", function (pictureResponse) {
+          if (pictureResponse && !pictureResponse.error) {
+            console.log('picture');
+            console.log(pictureResponse.data.url);
+            var im = document.getElementById('profileImage');
+            im.src = pictureResponse.data.url;
+
+            response.picture = pictureResponse.data.url;
+            window.localStorage['userData'] = JSON.stringify(response);
+
+          }
+  });
+
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -53,6 +65,9 @@
 
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
+
+     console.log('sutatus');
+     console.log(response);
   });
 
   };
@@ -77,14 +92,6 @@
     });
   }
 
-  function lala(){
-    FB.api(
-      "/{user-id}/picture",
-      function (response) {
-        if (response && !response.error) {
-          this.innerHTML = 'kk';
-          /* handle the result */
-        }
-      }
-  );
-  }
+
+
+

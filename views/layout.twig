@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>{{title}}ss</title>
-	<link rel="stylesheet"  type="text/css" href="/stylesheets/style.css">
-	<script src='/javascripts/fb.js'></script>
-</head>
-<body>
-	
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet"  type="text/css" href="/stylesheets/style.css">
+  			<script src="/javascripts/fb.js"></script>
+            <title>{% block title %}Settle{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2011 by <a href="#">you</a>.
+            {% endblock %}
+        </div>
+    </body>
+</html>
