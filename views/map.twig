@@ -3,16 +3,36 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
   }
+  .clear{clear: both}
   #map {
-    height: 100%;
+    height: 40%;
   }
+  #chatRoomList {
+    height: 50%;
+    max-height: 50%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .chatRoom{
+    border-bottom: 1px solid #dedede;
+    padding: 15px;
+  }
+  .chatRoom:nth-child(odd){
+    background-color: #dedede;
+  }
+  .name{float: left}
+  .users{float: right;}
+  #createEvent{background-color: #19c7bf;color: #fff;cursor: pointer;height: 10%;text-align: center; font-weight: bold; font-size: 20px;}
+  #createEvent span{vertical-align:middle }
 </style>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBavdsZji-wJshos01mjqZ_kS1--pmdcwY&signed_in=true&callback=initMap"></script>
-<script src="public/javascripts/map/map.js"></script>
-<!-- Message of the moment: <b>{{ title }}</b> -->
+<script src="javascripts/map/map.js"></script>
 
 <div id="map"></div>
+<div id="chatRoomList"></div>
+<div id="createEvent"><span>CRÉER UN ÉVÈNEMENT</span></div>
