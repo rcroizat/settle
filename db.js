@@ -42,6 +42,15 @@ module.exports = function(app) {
                 callback(chatRooms);
             });
         },
+        findChatRoom: function(chatRoomId, callback) {
+            var collection = app.db.instance.collection('chatRooms');
+            var ObjectId = require('mongodb').ObjectID;
+
+            collection.findOne( { "_id": ObjectId(chatRoomId) }, function (err, chatRoom) {
+                console.log(chatRoom);
+                callback(chatRoom); 
+            });
+        },
         deleteChatRooms: function(callback) {
             // Get the documents collection 
             var collection = app.db.instance.collection('chatRooms');
