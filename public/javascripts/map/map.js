@@ -15,6 +15,7 @@ if (location.hostname === "localhost") {
 map.socket = io.connect(url + ':'+port+'/');
 
 map.socket.on('chatRoomGet', function(data) {
+    console.log(data);
     map.setChatRoomsList(data);
 });
 
