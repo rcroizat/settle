@@ -13,41 +13,42 @@ module.exports = function(app) {
             MongoClient.connect(this.url, function(err, db) {
                 console.log("Connected correctly to server");
                 app.db.instance = db;
+
+                // app.db.insertChatRooms(function(data) {
+                //     console.log(data);
+                // })
             });
         },
-        insertChatRooms: function( callback) {
+        insertChatRooms: function(callback) {
             var collection = app.db.instance.collection('chatRooms');
             /// Insert some documents 
             collection.insertMany([{
-                "users": 0,
+                "users": 195,
                 "name": "Holmes COSMETEX",
                 "address": "618 Bushwick Court, Helen, District Of Columbia, 7976",
+                "registered": "2016-01-12T04:09:11 -01:00",
                 "latitude": 48.856894,
                 "longitude": 2.370497
             }, {
-                "users": 0,
+                "users": 88,
                 "name": "Walters MIRACLIS",
                 "address": "304 Cortelyou Road, Walland, New Hampshire, 4654",
+                "registered": "2016-01-22T02:58:40 -01:00",
                 "latitude": 48.850227,
                 "longitude": 2.372221
             }, {
-                "users": 0,
+                "users": 135,
                 "name": "Montgomery INSURON",
                 "address": "415 Ridgewood Place, Escondida, Vermont, 3031",
+                "registered": "2016-01-13T08:07:16 -01:00",
                 "latitude": 48.854769,
                 "longitude": 2.37876
-            }, {
-                "users": 0,
-                "name": "Horn ASSURITY",
-                "address": "640 Florence Avenue, Loyalhanna, Massachusetts, 3522",
-                "latitude": 48.859233,
-                "longitude": 2.376629
             }], function(err, result) {
                 console.log("Inserted 3 chatrooms into the chatrooms collection");
                 callback(result);
             });
         },
-        findChatRooms: function( callback) {
+        findChatRooms: function(callback) {
             // Get the documents collection 
             var collection = app.db.instance.collection('chatRooms');
             // Find some documents 
@@ -58,7 +59,7 @@ module.exports = function(app) {
                 callback(chatRooms);
             });
         },
-        deleteChatRooms: function( callback) {
+        deleteChatRooms: function(callback) {
             // Get the documents collection 
             var collection = app.db.instance.collection('chatRooms');
             // Find some documents 

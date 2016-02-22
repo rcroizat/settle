@@ -1,27 +1,22 @@
 // Connexion à socket.io
-var url = 'http://super-chat-alaurelut.c9users.io';
+var url = 'https://super-chat-alaurelut.c9users.io';
+var port = 8080;
 if (document.location.hostname == "localhost") {
     url = 'localhost';
+    var port = 3000;
 }
 
 var map = {};
 map.maxDistance = 500;
 
-var port = 8080;
-if (location.hostname === "localhost") {
-  var port = 3000;
-}
-
-map.socket = io.connect(url + ':'+port+'/');
+map.socket = io.connect(url + ':' + port + '/');
 
 map.socket.on('chatRoomGet', function(data) {
-    console.log(data);
-    map.setChatRoomsList(data);
+    map.chatRooms = data;
+    map.setChatRoomsList(map.chatRooms, map.userPosition);
 });
 
 map.init = function() {
-
-  console.log(this);
 
     map.instance = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
@@ -29,12 +24,15 @@ map.init = function() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
+    map.instance.addListener('dragend', function(e) {
+        map.setChatRoomsList(map.chatRooms, map.instance.getCenter());
+    });
+
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
 
             map.userPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            map.userLol = "lol";
 
             var pos = {
                 lat: position.coords.latitude,
@@ -61,16 +59,15 @@ map.init = function() {
     }
 }
 
-map.setChatRoomsList = function(chatRooms) {
+map.setChatRoomsList = function(chatRooms, mapCenter) {
 
-    console.log(this.userPosition);
-    console.log(this.userLol);
+    $('#chatRoomList').empty();
 
     for (i = 0; i < chatRooms.length; i++) {
 
         chatRooms[i].position = new google.maps.LatLng(chatRooms[i].latitude, chatRooms[i].longitude);
 
-        chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(this.userPosition, chatRooms[i].position));
+        chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(mapCenter, chatRooms[i].position));
 
         if (chatRooms[i].distance < this.maxDistance) {
             $('#chatRoomList').append('<div id="chatRoom' + i + '" class="chatRoom"><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div>');
