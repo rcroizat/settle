@@ -15,6 +15,18 @@ module.exports = function(app) {
                 app.db.instance = db;
             });
         },
+         insertChatRoom: function(name, description, latitude, longitude,  callback) {
+            var collection = app.db.instance.collection('chatRooms');
+            /// Insert some documents 
+            collection.insert(
+                {   name: name, 
+                    description: description,
+                    latitude: 20,
+                    longitude: 20 
+                },function(err, result) {
+                callback(result);
+            });
+        },
         insertChatRooms: function( callback) {
             var collection = app.db.instance.collection('chatRooms');
             /// Insert some documents 
@@ -53,7 +65,7 @@ module.exports = function(app) {
             // Find some documents 
             collection.find({}).toArray(function(err, chatRooms) {
                 console.log("Found the following records");
-                console.dir(chatRooms);
+                console.info(chatRooms);
                 // return chatRooms;
                 callback(chatRooms);
             });
