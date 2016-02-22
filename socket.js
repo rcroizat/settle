@@ -8,6 +8,25 @@ module.exports = function (app) {
 
 		io: null,
 		users: [],
+		create: function () {
+			this.io = require('socket.io')(app.server._server);
+			this.listen();
+		},
+
+		listen: function () {
+			this.io.sockets.on('connection', function (socket) {
+
+				socket.on('chatRoomGet', function() {
+				    app.socket.io.emit('chatRoomGet', app.socket.chatRooms);
+				    // this.emit('nouveau_client', {'pseudo':pseudo, 'users':app.socket.users});
+				});
+
+			});
+		},
+
+		emit: function (channel, data) {
+			app.socket.io.emit(channel, data);
+		},
 		chatRooms: 
 		[
 		  {
@@ -510,26 +529,7 @@ module.exports = function (app) {
 		    "latitude": 48.852175,
 		    "longitude": 2.370787
 		  }
-		],
-		create: function () {
-			this.io = require('socket.io')(app.server._server);
-			this.listen();
-		},
-
-		listen: function () {
-			this.io.sockets.on('connection', function (socket) {
-
-				socket.on('chatRoomGet', function() {
-				    app.socket.io.emit('chatRoomGet', app.socket.chatRooms);
-				    // this.emit('nouveau_client', {'pseudo':pseudo, 'users':app.socket.users});
-				});
-
-			});
-		},
-
-		emit: function (channel, data) {
-			app.socket.io.emit(channel, data);
-		}
+		]
 	}
 }
 
