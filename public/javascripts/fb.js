@@ -14,6 +14,7 @@
           }
   });
 
+
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -72,13 +73,13 @@
   //
   // These three cases are handled in the callback function.
 
-/*  FB.getLoginStatus(function(response) {
+  FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 
      console.log('sutatus');
      console.log(response);
   });
-*/
+
   };
 
   // Load the SDK asynchronously
@@ -99,6 +100,20 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
+  }
+
+
+
+
+  function ami() {
+    FB.api(
+      "/me/friends",
+      function (friends) {
+        if (friends && !friends.error) {
+          console.log(JSON.stringify(friends.data));
+        }
+      }
+  );
   }
 
 
