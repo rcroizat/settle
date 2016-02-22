@@ -49,12 +49,13 @@ module.exports = function(app) {
             });
 
             exp.post('/room/create', function(req, res, next) {
+                
                 //creating the room
-
                 var name = req.body.name;
                 var description = req.body.description;
-                var idr = '';
-                app.db.insertChatRoom(name, description, '54564', '564864',  function(data){
+                var latitude = req.body.latitude;
+                var longitude = req.body.longitude;
+                app.db.insertChatRoom(name, description, latitude, longitude,  function(data){
                     var idr = data.insertedIds;
                     res.redirect('/room/'+idr);
                 });

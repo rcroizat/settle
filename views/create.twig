@@ -1,15 +1,17 @@
 {% extends "layout.twig" %}
 {% block content %}
-<script>/*
-	if({{id}}){
-		console.log('kkoko');
-	}*/
-</script>
 <form method="POST" action="create">
   Nom<input type="text" name="name">
-  Description<input type="description">
+  Description<input type="text" name="description">
   Inviter des amis<input type="text">
-
+  <input type="hidden" name="latitude" id="latitude">
+  <input type="hidden" name="longitude" id="longitude">
+<script>
+	navigator.geolocation.getCurrentPosition(function(position) {
+		document.getElementById('longitude').value = position.coords.longitude;
+		document.getElementById('latitude').value = position.coords.latitude;
+	});
+</script>
  <input type="submit" value="Submit">
 </form>
 {% endblock %}

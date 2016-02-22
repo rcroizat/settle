@@ -25,8 +25,8 @@ module.exports = function(app) {
             collection.insert(
                 {   name: name, 
                     description: description,
-                    latitude: 20,
-                    longitude: 20 
+                    latitude: latitude,
+                    longitude: longitude 
                 },function(err, result) {
                 callback(result);
             });
