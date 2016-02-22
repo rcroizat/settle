@@ -25,8 +25,6 @@ module.exports = function(app) {
         	if (app.mode === 'dev') {
         		port = 3000;
         	}
-        	console.log(app.mode);
-        	console.log(port);
             this._server.listen(port, function() {
                 console.log('up and running');
             });
@@ -58,14 +56,16 @@ module.exports = function(app) {
                 var idr = '';
                 app.db.insertChatRoom(name, description, '54564', '564864',  function(data){
                     var idr = data.insertedIds;
-                    console.info(idr);
                     res.redirect('/room/'+idr);
                 });
             });
 
             exp.get('/room/:id', function(req, res, next) {
-                var id = req.body.id;
-                res.render('room', { title: 'Titre de la room' }); /*  On cherche le titre de la room sur mongp (commentaire a sup)*/
+                var id = req.params.id;
+                app.db.findChatRoom(id,  function(chatRoom){
+                    res.render('room', { title: chatRoom.name, room: chatRoom }); /*  On cherche le titre de la room sur mongp (commentaire a sup)*/
+                });
+                
             });
             exp.get('/map', function(req, res, next) {
                 res.render('map', { title: 'Evénement à proximités' });

@@ -70,7 +70,7 @@ map.setChatRoomsList = function(chatRooms, mapCenter) {
         chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(mapCenter, chatRooms[i].position));
 
         if (chatRooms[i].distance < this.maxDistance) {
-            $('#chatRoomList').append('<div id="chatRoom' + i + '" class="chatRoom"><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div>');
+            $('#chatRoomList').append('<a href="room/'+chatRooms[i]._id+'" class="chatRoom"><div id="chatRoom' + i + '" ><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div></a>');
         }
     }
 }
