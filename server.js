@@ -21,7 +21,13 @@ module.exports = function(app) {
         },
 
         listen: function() {
-            this._server.listen(3000, function() {
+        	var port = 8080;
+        	if (app.mode === 'dev') {
+        		port = 3000;
+        	}
+        	console.log(app.mode);
+        	console.log(port);
+            this._server.listen(port, function() {
                 console.log('up and running');
             });
         },
@@ -29,9 +35,6 @@ module.exports = function(app) {
         route: function() {
 
             exp.set('views', path.join(__dirname, 'views'));
-
-            console.log('__dirname');
-            console.log(__dirname);
             exp.set('view engine', 'twig');
 
             exp.use(bodyParser.json());

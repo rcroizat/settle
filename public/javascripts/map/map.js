@@ -6,7 +6,13 @@ if (document.location.hostname == "localhost") {
 
 var map = {};
 map.maxDistance = 500;
-map.socket = io.connect(url + ':3000/');
+
+var port = 8080;
+if (location.hostname === "localhost") {
+  var port = 3000;
+}
+
+map.socket = io.connect(url + ':'+port+'/');
 
 map.socket.on('chatRoomGet', function(data) {
     map.setChatRoomsList(data);
