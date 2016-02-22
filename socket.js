@@ -16,7 +16,7 @@ module.exports = function (app) {
 		listen: function () {
 			this.io.sockets.on('connection', function (socket) {
 				socket.on('chatRoomGet', function() {
-					app.db.findChatRooms(app.db.instance, function(data) {
+					app.db.findChatRooms( function(data) {
 	                     app.socket.io.emit('chatRoomGet', data );
 	                });
 				});

@@ -15,8 +15,8 @@ module.exports = function(app) {
                 app.db.instance = db;
             });
         },
-        insertChatRooms: function(db, callback) {
-            var collection = db.collection('chatRooms');
+        insertChatRooms: function( callback) {
+            var collection = app.db.instance.collection('chatRooms');
             /// Insert some documents 
             collection.insertMany([{
                 "users": 0,
@@ -47,9 +47,9 @@ module.exports = function(app) {
                 callback(result);
             });
         },
-        findChatRooms: function(db, callback) {
+        findChatRooms: function( callback) {
             // Get the documents collection 
-            var collection = db.collection('chatRooms');
+            var collection = app.db.instance.collection('chatRooms');
             // Find some documents 
             collection.find({}).toArray(function(err, chatRooms) {
                 console.log("Found the following records");
@@ -58,9 +58,9 @@ module.exports = function(app) {
                 callback(chatRooms);
             });
         },
-        deleteChatRooms: function(db, callback) {
+        deleteChatRooms: function( callback) {
             // Get the documents collection 
-            var collection = db.collection('chatRooms');
+            var collection = app.db.instance.collection('chatRooms');
             // Find some documents 
             collection.remove({});
             callback();

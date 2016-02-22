@@ -45,9 +45,18 @@ module.exports = function(app) {
             exp.get('/', function(req, res, next) {
 			  res.render('index', { title: 'Settle' });
 			});
-            exp.get('/create', function(req, res, next) {
-			  res.render('create', { title: 'Créér un chat' });
-			});
+            exp.get('/room/create', function(req, res, next) {
+              res.render('create', { title: 'Créér un chat' });
+            });
+            exp.post('/room/create', function(req, res, next) {
+                db.chatroom.insert({nom:"Johansson", prenom:"Scarlett"});
+                var titre = req.body.titre;
+              res.render('create', { title: titre });
+            });
+            exp.get('/room/:id', function(req, res, next) {
+                var id = req.body.id;
+                res.render('room', { title: 'Titre de la room' }); /*  On cherche le titre de la room sur mongp (commentaire a sup)*/
+            });
             exp.get('/map', function(req, res, next) {
                 res.render('map', { title: 'Evénement à proximités' });
             });

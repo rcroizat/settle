@@ -1,21 +1,10 @@
 {% extends "layout.twig" %}
-  {% block content %}
-  <h1>Welcome to {{title}}</h1>
- 
-  <div class="fb-like"  data-share="true" data-width="450" data-show-faces="true">
-  </div>
-  <div  class='fb-login-button'
-  data-max-rows="1"
-  data-size="xlarge"
-  data-show-faces="true"
-  data-auto-logout-link="true"></div>
+{% block content %}
+<form method="POST" action="create">
+  Titre<input type="text" name="titre">
+  Description<input type="text">
+  Inviter des amis<input type="text">
 
-<fb:login-button  scope="public_profile,email,user_friends,email,user_about_me,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_birthday,user_education_history,user_events,user_games_activity,user_hometown,user_likes,user_location,user_managed_groups,user_photos,user_posts" onlogin="checkLoginState()">
-</fb:login-button>
-  <div id="status"></div>
-
-
-
-<img src="" alt="D" id="profileImage">
-<div onclick="testlog()">dkfkfkfk</div>
+ <input type="submit" value="Submit">
+</form>
 {% endblock %}
