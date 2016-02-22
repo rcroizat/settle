@@ -3,6 +3,6 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('map', { title: 'map' });
+  res.render('map', { title: 'Evénement à proximités' });
 });
 module.exports = router;

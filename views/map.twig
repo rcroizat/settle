@@ -1,3 +1,5 @@
+{% extends "layout.twig" %}
+{% block content %}
 <style>
   html, body {
     height: 100%;
@@ -36,4 +38,5 @@
 
 <div id="map"></div>
 <div id="chatRoomList"></div>
-<div id="createEvent"><span>CRÉER UN ÉVÈNEMENT</span></div>
+<div id="createEvent"><span><a href="/create">CRÉER UN ÉVÈNEMENT</a></span></div>
+{% endblock %}

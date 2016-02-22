@@ -4,11 +4,11 @@
         {% block head %}
             <link rel="stylesheet"  type="text/css" href="/stylesheets/style.css">
   			<script src="/javascripts/fb.js"></script>
-            <title>{% block title %}Settle{% endblock %}</title>
+            <title>{% block title %}{{title}}{% endblock %}</title>
         {% endblock %}
     </head>
     <body>
-        <div id="content">{% block content %}{% endblock %}</div>
+        {% block content %}{% endblock %}
         <div id="footer">
             {% block footer %}
                 &copy; Copyright 2011 by <a href="#">you</a>.

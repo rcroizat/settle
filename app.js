@@ -10,6 +10,7 @@ var twig = Twig.twig;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
+var create = require('./routes/create');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/map', map);
+app.use('/create', create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

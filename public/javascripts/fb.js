@@ -21,6 +21,11 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+
+    
+      /*
+
+      window.location="/map";*/
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -38,7 +43,11 @@
   // code below.
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
+          console.log('reponse '+response.status);
       statusChangeCallback(response);
+      if(response.status === 'connected'){
+        window.location="/map";
+      }
     });
   }
 
