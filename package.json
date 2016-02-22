@@ -17,6 +17,7 @@
     "twig": "~0.8.8",
     "socket.io": "~1.4.5",
     "ent": "~2.2.0",
-    "dateformat": "~1.0.12"
+    "dateformat": "~1.0.12",
+    "mongodb": "~2.1.7"
   }
 }
