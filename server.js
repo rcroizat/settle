@@ -7,8 +7,6 @@ var cookieParser = require('cookie-parser');
 var Twig  = require('twig');
 var twig = Twig.twig;
 
-
-
 module.exports = function(app) {
     'use strict';
 
@@ -31,6 +29,9 @@ module.exports = function(app) {
         route: function() {
 
             exp.set('views', path.join(__dirname, 'views'));
+
+            console.log('__dirname');
+            console.log(__dirname);
             exp.set('view engine', 'twig');
 
             exp.use(bodyParser.json());
