@@ -55,12 +55,12 @@ module.exports = function(app) {
 
                 var name = req.body.name;
                 var description = req.body.description;
-                var idr ='';
+                var idr = '';
                 app.db.insertChatRoom(name, description, '54564', '564864',  function(data){
-                    console.log('idididid  '+data.insertedIds);
-                    idr = data.insertedIds;
+                    var idr = data.insertedIds;
+                    console.info(idr);
+                    res.redirect('/room/'+idr);
                 });
-            res.redirect('/room/'+idr);
             });
 
             exp.get('/room/:id', function(req, res, next) {
