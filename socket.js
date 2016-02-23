@@ -1,13 +1,9 @@
-var ent = require('ent'),
-    dateFormat = require('dateformat');
-
 module.exports = function (app) {
 	'use strict';
 
 	return{
 
 		io: null,
-		users: [],
 		create: function () {
 			this.io = require('socket.io')(app.server._server);
 			this.listen();

@@ -6,7 +6,18 @@
 
 <h1>Name : {{room.name}}</h1>
 <h1>Description : {{room.description}}</h1>
-<h1>latitude : {{room.latitude}}</h1>
-<h1>longitude : {{room.longitude}}</h1>
 
+<form action="/" method="post" id="formulaire_chat">
+    <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus />
+    <input type="submit" id="envoi_message" value="Envoyer" />
+</form>
+
+<h1>Listes des users connectés :</h1>
+<section id="zone_users">   
+</section>
+
+<section id="zone_chat">
+</section>
+
+<script src="../javascripts/chat/chat.js"></script>
 {% endblock %}

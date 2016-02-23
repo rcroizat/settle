@@ -25,16 +25,7 @@ module.exports = function(app) {
                 // });
             });
         },
-        insertChatRoom: function(name, description, latitude, longitude, callback) {
-            this.collections.chatRooms.insert({
-                name: name,
-                description: description,
-                latitude: latitude,
-                longitude: longitude
-            }, function(err, result) {
-                callback(result);
-            });
-        },
+
         registerUser: function(user, callback) {
             this.collections.users.findOne({ facebookId: user.facebookId }, function(err, result) {
                 console.log('findOne');
@@ -50,6 +41,17 @@ module.exports = function(app) {
                 }
             });
 
+        },
+        
+        insertChatRoom: function(name, description, latitude, longitude, callback) {
+            this.collections.chatRooms.insert({
+                name: name,
+                description: description,
+                latitude: latitude,
+                longitude: longitude
+            }, function(err, result) {
+                callback(result);
+            });
         },
         findChatRooms: function(callback) {
 

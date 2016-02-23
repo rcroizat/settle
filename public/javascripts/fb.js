@@ -67,7 +67,6 @@ user.getFacebookUser = function() {
         user.data.name = response.name;
         user.data.facebookId = response.id;
         user.getFacebookUserProfilPicture();
-
     });
 };
 
@@ -93,17 +92,19 @@ user.getFacebookFriends = function() {
 };
 
 user.register = function() {
-    var url = 'https://super-chat-alaurelut.c9users.io';
-    var port = 8080;
-    if (document.location.hostname == "localhost") {
-        url = 'localhost';
-        var port = 3000;
-    }
-    var socket = io.connect(url + ':' + port + '/');
-    socket.on('facebookLogin', function(data) {
-      window.location = "/map";
-    });
-    socket.emit('facebookLogin', user.data);
+    console.log('register');
+    // var url = 'https://settle-alaurelut.c9users.io';
+    // var port = 8080;
+    // if (document.location.hostname == "localhost") {
+    //     url = 'localhost';
+    //     var port = 3000;
+    // }
+    // var socket = io.connect(url + ':' + port + '/');
+    // socket.on('facebookLogin', function(data) {
+        window.localStorage['userData'] = JSON.stringify(user.data);
+        window.location = "/map";
+    // });
+    // socket.emit('facebookLogin', user.data);
 };
 
 

@@ -1,5 +1,5 @@
 // Connexion à socket.io
-var url = 'https://super-chat-alaurelut.c9users.io';
+var url = 'https://settle-alaurelut.c9users.io';
 var port = 8080;
 if (document.location.hostname == "localhost") {
     url = 'localhost';
