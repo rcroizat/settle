@@ -8,54 +8,68 @@ module.exports = function(app) {
         // Connection URL 
         url: 'mongodb://localhost:27017/',
         instance: {},
+        collections: {},
         create: function() {
             // Use connect method to connect to the Server 
             MongoClient.connect(this.url, function(err, db) {
                 console.log("Connected correctly to server");
                 app.db.instance = db;
+                app.db.collections.chatRooms = app.db.instance.collection('chatRooms');
+                app.db.collections.users = app.db.instance.collection('users');
 
-                // app.db.insertChatRooms(function(data) {
+                // app.db.deleteChatRooms(function(data) {
                 //     console.log(data);
-                // })
+                // });
+                // app.db.deleteUsers(function(data) {
+                //     console.log(data);
+                // });
             });
         },
-        insertChatRoom: function(name, description, latitude, longitude,  callback) {
-            var collection = app.db.instance.collection('chatRooms');
-            /// Insert some documents 
-            collection.insert(
-                {   name: name, 
-                    description: description,
-                    latitude: latitude,
-                    longitude: longitude 
-                },function(err, result) {
+        insertChatRoom: function(name, description, latitude, longitude, callback) {
+            this.collections.chatRooms.insert({
+                name: name,
+                description: description,
+                latitude: latitude,
+                longitude: longitude
+            }, function(err, result) {
                 callback(result);
             });
         },
+        registerUser: function(user, callback) {
+            this.collections.users.findOne({ facebookId: user.facebookId }, function(err, result) {
+                console.log('findOne');
+                console.log(result);
+                if (result !== null) {
+                    console.log('User exists already');
+                } else {
+                    app.db.collections.users.insert(
+                        user,
+                        function(err, result) {
+                            callback(result);
+                        });
+                }
+            });
+
+        },
         findChatRooms: function(callback) {
-            // Get the documents collection 
-            var collection = app.db.instance.collection('chatRooms');
-            // Find some documents 
-            collection.find({}).toArray(function(err, chatRooms) {
-                console.log("Found the following records");
-                console.info(chatRooms);
-                // return chatRooms;
+
+            this.collections.chatRooms.find({}).toArray(function(err, chatRooms) {
                 callback(chatRooms);
             });
         },
         findChatRoom: function(chatRoomId, callback) {
-            var collection = app.db.instance.collection('chatRooms');
             var ObjectId = require('mongodb').ObjectID;
 
-            collection.findOne( { "_id": ObjectId(chatRoomId) }, function (err, chatRoom) {
-                console.log(chatRoom);
-                callback(chatRoom); 
+            this.collections.chatRooms.findOne({ "_id": ObjectId(chatRoomId) }, function(err, chatRoom) {
+                callback(chatRoom);
             });
         },
         deleteChatRooms: function(callback) {
-            // Get the documents collection 
-            var collection = app.db.instance.collection('chatRooms');
-            // Find some documents 
-            collection.remove({});
+            this.collections.chatRooms.remove({});
+            callback();
+        },
+        deleteUsers: function(callback) {
+            this.collections.users.remove({});
             callback();
         }
     }

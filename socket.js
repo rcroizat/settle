@@ -20,6 +20,11 @@ module.exports = function (app) {
 	                     app.socket.io.emit('chatRoomGet', data );
 	                });
 				});
+				socket.on('facebookLogin', function(user) {
+					app.db.registerUser(user,  function(data) {
+	                     app.socket.io.emit('facebookLogin', data );
+	                });
+				});
 
 			});
 		},
