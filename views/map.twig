@@ -7,6 +7,51 @@
     padding: 0;
     font-family: Arial, sans-serif;
   }
+
+  .controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  #pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+  }
+
+  #pac-input:focus {
+    border-color: #4d90fe;
+  }
+
+  .pac-container {
+    font-family: Roboto;
+  }
+
+  #type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+  }
+
+  #type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  #target {
+    width: 345px;
+  }
   .clear{clear: both}
   #map {
     height: 40%;
@@ -34,7 +79,7 @@
 <script src="javascripts/map/map.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBavdsZji-wJshos01mjqZ_kS1--pmdcwY&libraries=places,geometry&callback=initMap"></script>
 
-
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 <div id="chatRoomList"></div>
 <div id="createEvent"><span><a href="/room/create">CRÉER UN ÉVÈNEMENT</a></span></div>
