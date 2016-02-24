@@ -92,19 +92,20 @@ user.getFacebookFriends = function() {
 };
 
 user.register = function() {
-    console.log('register');
-    // var url = 'https://settle-alaurelut.c9users.io';
-    // var port = 8080;
-    // if (document.location.hostname == "localhost") {
-    //     url = 'localhost';
-    //     var port = 3000;
-    // }
-    // var socket = io.connect(url + ':' + port + '/');
-    // socket.on('facebookLogin', function(data) {
-        window.localStorage['userData'] = JSON.stringify(user.data);
-        window.location = "/map";
-    // });
-    // socket.emit('facebookLogin', user.data);
+    var url = 'https://settle-alaurelut.c9users.io';
+    var port = 8080;
+    if (document.location.hostname == "localhost") {
+        url = 'localhost';
+        var port = 3000;
+    }
+    var socket = io.connect(url + ':' + port + '/');
+    socket.on('facebookLogin', function(data) {7
+        if (data !== 'exist') {
+            window.localStorage['userData'] = JSON.stringify(user.data);
+        }
+        window.location = "/map";        
+    });
+    socket.emit('facebookLogin', user.data);
 };
 
 

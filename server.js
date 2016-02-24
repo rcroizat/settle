@@ -55,7 +55,7 @@ module.exports = function(app) {
                 var description = req.body.description;
                 var latitude = req.body.latitude;
                 var longitude = req.body.longitude;
-                app.db.insertChatRoom(name, description, latitude, longitude,  function(data){
+                app.rooms.insertChatRoom(name, description, latitude, longitude,  function(data){
                     var idr = data.insertedIds;
                     res.redirect('/room/'+idr);
                 });
@@ -63,7 +63,7 @@ module.exports = function(app) {
 
             exp.get('/room/:id', function(req, res, next) {
                 var id = req.params.id;
-                app.db.findChatRoom(id,  function(chatRoom){
+                app.rooms.findChatRoom(id,  function(chatRoom){
                     res.render('room', { title: chatRoom.name, room: chatRoom }); /*  On cherche le titre de la room sur mongp (commentaire a sup)*/
                 });
                 
