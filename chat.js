@@ -60,11 +60,17 @@ module.exports = function(app) {
                 	}
                     
                 });
+
+                socket.on('chatRoomGet', function() {
+					app.db.findChatRooms( function(data) {
+	                    app.chat.io.emit('chatRoomGet', data );
+	                });
+				});
+
             });
         },
 
         emit: function(socket, channel, data) {
-
             app.chat.io.to(socket.roomId).emit(channel, data);
         }
     }

@@ -12,6 +12,8 @@ map.maxDistance = 500;
 map.socket = io.connect(url + ':' + port + '/');
 
 map.socket.on('chatRoomGet', function(data) {
+    console.log('chatRoomGet');
+    console.log(data);
     map.chatRooms = data;
     map.setChatRoomsList(map.chatRooms, map.userPosition);
 });
