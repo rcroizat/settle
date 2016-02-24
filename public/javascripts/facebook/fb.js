@@ -15,9 +15,7 @@ function statusChangeCallback(response) {
         user.getFacebookUser();
 
     } else if (response.status === 'not_authorized') {
-        window.location = "/";
     } else {
-        window.location = "/";
     }
 }
 

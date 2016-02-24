@@ -3,18 +3,19 @@
 <form method="POST" action="create">
   Nom<input type="text" name="name">
   Description<input type="text" name="description">
-  Inviter des amis
-  <select name="friends" id="friends">
-  </select>
 
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
- <input type="submit" value="Submit">
-<div id="lala" style="background-image:url(http://graph.facebook.com/10208311903576501/picture);">
-	
-</div>
- <script>
 
+   Inviter des amis
+<div id="friends">
+	<ul>
+	</ul>
+</div>
+
+
+ <input type="submit" value="Submit">
+ <script>
 navigator.geolocation.getCurrentPosition(function(position) {
 	document.getElementById('longitude').value = position.coords.longitude;
 	document.getElementById('latitude').value = position.coords.latitude;
@@ -29,9 +30,7 @@ var friend = function(){
 
 var logArrayElements = function (element, index, array) {
     var friend = document.getElementById('friends');
-    var lala = document.getElementById('lala');
-    console.log('<img src="http://graph.facebook.com/'+element.id+'/picture"/>');
-    friend.innerHTML += '<option value="'+element.name+'">'+element.name+'</option>';
+    friend.innerHTML += '<li><input type="checkbox" name="friendId" value="'+element.id+'"><img src="http://graph.facebook.com/'+element.id+'/picture"/>'+element.name+'</li>';
 };
 
 friend();

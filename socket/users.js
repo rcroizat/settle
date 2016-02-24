@@ -10,6 +10,13 @@ module.exports = function(app) {
                     app.socket.io.emit('facebookLogin', data);
                 });
             });
+
+            socket.on('updateNotifications', function(facebookId) {
+                app.users.getUserNotifications(facebookId, function(data) {
+                    console.log('socket register user');
+                    app.socket.io.emit('userNewNotifications', data);
+                });
+            });
         }
     }
 }

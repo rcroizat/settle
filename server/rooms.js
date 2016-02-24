@@ -20,14 +20,25 @@ module.exports = function(app) {
             });
         },
 
-        insertChatRoom: function(name, description, latitude, longitude, callback) {
+        insertChatRoom: function(name, description, latitude, longitude, friendId, callback) {
+
+            var friendId = friendId;
             this.collections.chatRooms.insert({
                 name: name,
                 description: description,
                 latitude: latitude,
                 longitude: longitude
             }, function(err, result) {
+                console.log('friendId 2');
+                console.log(friendId);
+
+                for (var i = 0; i < friendId.length; i++) {
+                    app.users.notificateFriend(friendId[i], result.insertedIds);
+                };
+                
+
                 callback(result);
+                
             });
         },
         findChatRooms: function(callback) {
