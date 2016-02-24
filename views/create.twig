@@ -3,16 +3,36 @@
 <form method="POST" action="create">
   Nom<input type="text" name="name">
   Description<input type="text" name="description">
-  Inviter des amis<input type="text">
+  Inviter des amis
+  <select name="friends" id="friends">
+  </select>
+
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
-<script>
-	navigator.geolocation.getCurrentPosition(function(position) {
-		document.getElementById('longitude').value = position.coords.longitude;
-		document.getElementById('latitude').value = position.coords.latitude;
-	});
-</script>
-<div onclick='ami()';>Voir ami dans la console</div>
  <input type="submit" value="Submit">
+ 
+<script src="/javascripts/facebook/fb.js"></script>
+ <script>
+
+navigator.geolocation.getCurrentPosition(function(position) {
+	document.getElementById('longitude').value = position.coords.longitude;
+	document.getElementById('latitude').value = position.coords.latitude;
+});
+
+
+
+var user = JSON.parse(localStorage['userData'] || '{}');
+console.log(user)
+var friend = function(){
+	user.facebookFriends.forEach(logArrayElements);
+}
+
+var logArrayElements = function (element, index, array) {
+    var friend = document.getElementById('friends');
+    friend.innerHTML += '<option value="'+element.name+'"><img src="'+element.profilPicture+'"/>'+element.name+'</option>';
+};
+
+friend();
+ </script>
 </form>
 {% endblock %}
