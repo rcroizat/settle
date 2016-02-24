@@ -1,5 +1,6 @@
 var ent = require('ent'),
-    dateFormat = require('dateformat');
+    dateFormat = require('dateformat'),
+    ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(app) {
     'use strict';
@@ -7,6 +8,7 @@ module.exports = function(app) {
     return {
 
         rooms: [],
+
 
         listen: function(socket) {
 
@@ -25,7 +27,10 @@ module.exports = function(app) {
 
                 app.chat.rooms[roomId].push(user);
 
-                app.chat.emit(socket, 'userConnected', { 'user': user, 'users': app.chat.rooms[roomId] });
+                app.rooms.updateChatRooms({ "_id": ObjectId(roomId)}, { 'users':app.chat.rooms[roomId].length }, function(data) {
+                    app.chat.emit(socket, 'userConnected', { 'user': user, 'users': app.chat.rooms[roomId] });
+                    app.socket.io.emit('chatRoomUserNumberUpdate', { 'roomId': roomId, 'users': app.chat.rooms[roomId].length });
+                });
             });
 
             // Dès qu'on reçoit un message, on récupère le pseudo de son auteur et on le transmet aux autres personnes
@@ -48,8 +53,11 @@ module.exports = function(app) {
                         }
                     }
 
-                    app.chat.emit(socket, 'userDeconnection', socket.facebookId);
-
+                    app.rooms.updateChatRooms({ "_id": ObjectId(socket.roomId)}, { 'users':app.chat.rooms[socket.roomId].length }, function(data) {
+                        app.chat.emit(socket, 'userDeconnection', socket.facebookId);
+                        app.socket.io.emit('chatRoomUserNumberUpdate', { 'roomId': socket.roomId, 'users': app.chat.rooms[socket.roomId].length });
+                    });
+                    
                     socket.leave(socket.roomId);
                 }
 

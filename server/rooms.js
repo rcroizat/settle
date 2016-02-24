@@ -36,6 +36,16 @@ module.exports = function(app) {
                 callback(chatRooms);
             });
         },
+        updateChatRooms: function(chatRoom, update, callback) {
+
+            this.collections.chatRooms.updateOne(
+                chatRoom, {
+                    $set: update,
+                },
+                function(err, chatRooms) {
+                    callback(chatRooms);
+                });
+        },
         findChatRoom: function(chatRoomId, callback) {
             var ObjectId = require('mongodb').ObjectID;
 

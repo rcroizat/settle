@@ -12,10 +12,12 @@ map.maxDistance = 500;
 map.socket = io.connect(url + ':' + port + '/');
 
 map.socket.on('chatRoomGet', function(data) {
-    console.log('chatRoomGet');
-    console.log(data);
     map.chatRooms = data;
     map.setChatRoomsList(map.chatRooms, map.userPosition);
+});
+
+map.socket.on('chatRoomUserNumberUpdate', function(data) {
+    map.updateRoomUsers(data.roomId, data.users);
 });
 
 map.init = function() {
@@ -72,9 +74,13 @@ map.setChatRoomsList = function(chatRooms, mapCenter) {
         chatRooms[i].distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(mapCenter, chatRooms[i].position));
 
         if (chatRooms[i].distance < this.maxDistance) {
-            $('#chatRoomList').append('<a href="room/'+chatRooms[i]._id+'" class="chatRoom"><div id="chatRoom' + i + '" ><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div></a>');
+            $('#chatRoomList').append('<a href="room/'+chatRooms[i]._id+'" class="chatRoom"><div id="' + chatRooms[i]._id + '" ><span class="name">' + chatRooms[i].name + ' - ' + chatRooms[i].distance + 'm</span><span class="users">' + chatRooms[i].users + ' Users</span><div class="clear"></div></div></a>');
         }
     }
+}
+
+map.updateRoomUsers = function(roomId, usersNumber) {
+    $('#'+ roomId + ' .users').html(usersNumber + ' Users');
 }
 
 function initMap() {
