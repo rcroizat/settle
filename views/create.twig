@@ -10,8 +10,9 @@
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
  <input type="submit" value="Submit">
- 
-<script src="/javascripts/facebook/fb.js"></script>
+<div id="lala" style="background-image:url(http://graph.facebook.com/10208311903576501/picture);">
+	
+</div>
  <script>
 
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -22,14 +23,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 
 var user = JSON.parse(localStorage['userData'] || '{}');
-console.log(user)
 var friend = function(){
 	user.facebookFriends.forEach(logArrayElements);
 }
 
 var logArrayElements = function (element, index, array) {
     var friend = document.getElementById('friends');
-    friend.innerHTML += '<option value="'+element.name+'"><img src="'+element.profilPicture+'"/>'+element.name+'</option>';
+    var lala = document.getElementById('lala');
+    console.log('<img src="http://graph.facebook.com/'+element.id+'/picture"/>');
+    friend.innerHTML += '<option value="'+element.name+'">'+element.name+'</option>';
 };
 
 friend();
