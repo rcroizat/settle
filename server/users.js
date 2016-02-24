@@ -15,8 +15,7 @@ module.exports = function(app) {
                 app.users.instance = db;
                 app.users.collections.users = app.users.instance.collection('users');
 
-                // app.users.deleteUsers(function(data) {
-                // });
+                // app.users.deleteUsers(function(data) {});
             });
         },
 

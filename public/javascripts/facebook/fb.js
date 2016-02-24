@@ -5,6 +5,7 @@ var user = {
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
 
+
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -41,7 +42,7 @@ window.fbAsyncInit = function() {
         cookie: true, // enable cookies to allow the server to access 
         // the session
         xfbml: true, // parse social plugins on this page
-        version: 'v2.2' // use version 2.2
+        version: 'v2.5' // use version 2.2
     });
 
     // Gets the state of the person visiting this page and can return one of three states to
@@ -71,7 +72,7 @@ user.getFacebookUser = function() {
 };
 
 user.getFacebookUserProfilPicture = function() {
-    FB.api("/" + user.facebookId + "/picture", function(pictureResponse) {
+    FB.api("/" + user.data.facebookId + "/picture", function(pictureResponse) {
         if (pictureResponse && !pictureResponse.error) {
             user.data.profilPicture = pictureResponse.data.url;
             user.getFacebookFriends();
@@ -99,11 +100,9 @@ user.register = function() {
         var port = 3000;
     }
     var socket = io.connect(url + ':' + port + '/');
-    socket.on('facebookLogin', function(data) {7
-        if (data !== 'exist') {
-            window.localStorage['userData'] = JSON.stringify(user.data);
-        }
-        window.location = "/map";        
+    socket.on('facebookLogin', function(data) {
+        window.localStorage['userData'] = JSON.stringify(user.data);
+        window.location = "/map";
     });
     socket.emit('facebookLogin', user.data);
 };

@@ -28,7 +28,7 @@ socket.on('userConnected', function(data) {
 
 // Quand on reçoit un message, on l'insère dans la page
 socket.on('message', function(data) {
-    insereMessage(data.date, data.user.name, data.message)
+    insereMessage(data.date, data.user, data.message)
 });
 
 socket.on('isTyping', function(pseudo) {
@@ -58,6 +58,6 @@ $("#message").keydown(function() {
 });
 
 // Ajoute un message dans la page
-function insereMessage(date, pseudo, message) {
-    $('#zone_chat').prepend('<p><span>' + date + '</span> <strong>' + pseudo + '</strong> ' + message + '</p>');
+function insereMessage(date, user, message) {
+    $('#zone_chat').prepend('<img src="' + user.profilPicture + '" height="42" width="42"><p><span>' + date + '</span> <strong>' + user.name + '</strong> ' + message + '</p>');
 }
