@@ -41,6 +41,18 @@ module.exports = function(app) {
                     $push: { notification: roomId }
                 },
                 function(err, data) {
+                    app.socket.io.emit('notifiedUser', friendId);
+                    console.log('friend socket');
+                    console.log(friendId);
+                    console.log(data);
+                });
+        },
+        findNotif: function(facebookId, roomId) {
+            this.collections.users.updateOne({ facebookId: friendId }, {
+                    $push: { notification: roomId }
+                },
+                function(err, data) {
+                    app.socket.io.emit('notifiedUser', friendId);
                     console.log('friend notified');
                     console.log(data);
                 });
