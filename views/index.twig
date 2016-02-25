@@ -8,13 +8,16 @@
   data-show-faces="true"
   data-auto-logout-link="true"></div>
 
+
 <fb:login-button  scope="public_profile,email,user_friends,email,user_about_me,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_birthday,user_education_history,user_events,user_games_activity,user_hometown,user_likes,user_location,user_managed_groups,user_photos,user_posts" onlogin="checkLoginState()">
 </fb:login-button>
   <div id="status"></div>
-
+  
+ <div class="red">Je suis le READ</div>
 
 
 <img src="" alt="D" id="profileImage">
 
+<link rel="stylesheet" type="text/css" href="stylesheets/index.css">
 <script src="/javascripts/facebook/fb.js"></script>
 {% endblock %}
