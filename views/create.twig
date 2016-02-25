@@ -1,12 +1,13 @@
 {% extends "layout.twig" %}
 {% block content %}
 <form method="POST" action="create">
-  Nom<input type="text" name="name">
-  Description<input type="text" name="description">
+  Nom<input type="text" name="name" required>
+  Description<input type="text" name="description" required>
 
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
   <input type="hidden" name="userId" id="userId"  value="">
+  <input type="hidden" name="userName" id="userName"  value="">
 
    Inviter des amis
 <div id="friends">
@@ -28,7 +29,9 @@ var user = JSON.parse(localStorage['userData'] || '{}');
 
 var friend = function(){
     var userId = document.getElementById('userId');
+    var userName = document.getElementById('userName');
     userId.value = user.facebookId;
+    userName.value = user.name;
 	user.facebookFriends.forEach(logArrayElements);
 }
 

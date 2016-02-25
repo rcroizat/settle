@@ -16,15 +16,20 @@ module.exports = function(app) {
             });
 
         },
-        notificateFriend: function(friendId, notifierId, roomId) {
-            var notifications = {};
-            notifications.notifier = notifierId;
-            notifications.room = roomId;
-            app.db._collections.users.updateOne({ facebookId: friendId }, {
-                    $push: { 'notifications': notifications }
+
+        notificateFriend: function(friendId, notifierId, roomId, userName, description) {
+                    console.log("ROOM ID");
+                    console.log(roomId);
+                    var notifications ={};
+                    notifications.notifier = notifierId;
+                    notifications.room = roomId;
+                this.collections.users.updateOne({ facebookId: friendId }, {
+                    $push: { 'notifications': notifications  }
                 },
                 function(err, data) {
                     notifications.friendId = friendId;
+                    notifications.userName = userName;
+                    notifications.descriptionRoom = description;
                     app.socket.io.emit('notifiedUser', notifications); // notificate the users
                 });
         },
