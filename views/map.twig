@@ -52,6 +52,20 @@
   #target {
     width: 345px;
   }
+
+
+  #navbar {
+    width: 100%;
+    height: 8%;
+    background-color: black;
+  }
+
+  #notif {
+    width: 30%;
+    height: 5%;
+    float:right;
+    color:red;
+  }
   .clear{clear: both}
   #map {
     height: 40%;
@@ -78,7 +92,9 @@
 
 <script src="javascripts/map/map.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBavdsZji-wJshos01mjqZ_kS1--pmdcwY&libraries=places,geometry&callback=initMap"></script>
-
+<nav id="navbar">
+  <div id="notif">{{notif}} MAMAMAMA</div>
+</nav>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 <div id="chatRoomList"></div>

@@ -35,22 +35,25 @@ module.exports = function(app) {
 
         },
         notificateFriend: function(friendId, roomId) {
-            console.log('notificate friend ');
                     console.log(friendId);
                     console.log(roomId);
             this.collections.users.updateOne({ facebookId: friendId }, {
                     $push: { notification: roomId }
                 },
                 function(err, data) {
-                    console.log('notificate friend ');
+                    console.log('friend notified');
                     console.log(data);
                 });
         },
+        findUser: function(user, callback) {
+           this.collections.users.findOne({ facebookId: user.facebookId }, function(err, result) {
+                callback(users);
+            });
+        },
         findUsers: function(query, callback) {
-
             this.collections.users.find(query).toArray(function(err, users) {
                 console.log('users');
-                console.log(users);
+                console.log(users[1].notification);
                 callback(users);
             });
         },

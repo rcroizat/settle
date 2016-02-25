@@ -95,7 +95,7 @@ user.register = function() {
     var socket = io.connect(url + ':' + port + '/');
     socket.on('facebookLogin', function(data) {
         window.localStorage['userData'] = JSON.stringify(user.data);
-        window.location = "/map";
+ /*       window.location = "/map";*/
     });
     socket.emit('facebookLogin', user.data);
 };

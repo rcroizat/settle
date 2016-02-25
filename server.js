@@ -45,7 +45,7 @@ module.exports = function(app) {
 			});
 
             exp.get('/room/create', function(req, res, next) {
-              res.render('create', { title: 'Créér un chat' });
+                    res.render('create', { title: 'Créer un chat' });
             });
 
             exp.post('/room/create', function(req, res, next) {
@@ -67,7 +67,7 @@ module.exports = function(app) {
             exp.get('/room/:id', function(req, res, next) {
                 var id = req.params.id;
                 app.rooms.findChatRoom(id,  function(chatRoom){
-                    res.render('room', { title: chatRoom.name, room: chatRoom }); /*  On cherche le titre de la room sur mongp (commentaire a sup)*/
+                    res.render('room', { title: chatRoom.name, room: chatRoom });
                 });
                 
             });
