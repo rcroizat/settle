@@ -38,8 +38,6 @@ map.init = function() {
 
     map.instance.addListener('bounds_changed', function() {
         searchBox.setBounds(map.instance.getBounds());
-        console.log('bounds_changed');
-        // map.setChatRoomsList(map.chatRooms, map.instance.getCenter());
     });
 
     searchBox.addListener('places_changed', function() {
@@ -94,10 +92,25 @@ map.init = function() {
     }
 }
 
-map.setChatRoomsList = function(chatRooms, mapCenter) {
+map.filter = 'users';
+
+map.setChatRoomsList = function(chatRooms, mapCenter, filter) {
 
     $('#chatRoomList').empty();
 
+
+    if ( map.filter !== filter) {
+        map.filter = filter;
+        chatRooms.sort(function(a, b) {
+            return a[filter] - b[filter];
+        });
+    }
+    else{
+        chatRooms.sort(function(a, b) {
+            return a[filter] + b[filter];
+        });
+    }
+    
     for (i = 0; i < chatRooms.length; i++) {
 
         chatRooms[i].position = new google.maps.LatLng(chatRooms[i].latitude, chatRooms[i].longitude);
@@ -116,4 +129,16 @@ map.updateRoomUsers = function(roomId, usersNumber) {
 
 function initMap() {
     map.init();
+    var filtersButton = document.querySelectorAll('.filterChatRooms');
+    for (var i = 0; i < filtersButton.length; i++) {
+        filtersButton[i].addEventListener('click', filterChatRoomList, false);
+    }
+}
+
+
+// filterChatRoomsDistance
+
+
+function filterChatRoomList () {
+    map.setChatRoomsList(map.chatRooms, map.instance.getCenter(), this.getAttribute('filter'));
 }
