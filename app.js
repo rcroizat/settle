@@ -12,12 +12,12 @@ app.rooms.create();
 app.users = require('./model/users')(app);
 app.users.create();
 
-
 // SOCKET
 app.chat = require('./socket/chat')(app);
 app.socketRooms = require('./socket/rooms')(app);
 app.socketUsers = require('./socket/users')(app);
 app.socket = require('./socket/socket')(app);
 app.socket.create();
+
 
 module.exports = app;

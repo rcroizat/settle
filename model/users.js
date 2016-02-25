@@ -58,7 +58,6 @@ module.exports = function(app) {
         findUsers: function(query, callback) {
             this.collections.users.find(query).toArray(function(err, users) {
                 console.log('users');
-                console.log(users[0].notifications);
                 callback(users);
             });
         },
