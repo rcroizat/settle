@@ -53,11 +53,12 @@ module.exports = function(app) {
                 var name = req.body.name;
                 var description = req.body.description;
                 var friendId = req.body.friendId;
+                var userName = req.body.userName;
                 var userId = req.body.userId;
                 var latitude = req.body.latitude;
                 var longitude = req.body.longitude;
                
-                app.rooms.insertChatRoom(userId, name, description, latitude, longitude, friendId, function(data){
+                app.rooms.insertChatRoom(userName, userId, name, description, latitude, longitude, friendId, function(data){
                     var roomId = data.insertedIds;
                     res.redirect('/room/'+roomId); 
                 });

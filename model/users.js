@@ -34,7 +34,7 @@ module.exports = function(app) {
             });
 
         },
-        notificateFriend: function(friendId, notifierId, roomId ) {
+        notificateFriend: function(friendId, notifierId, roomId, userName, description) {
                     console.log("ROOM ID");
                     console.log(roomId);
                     var notifications ={};
@@ -45,6 +45,8 @@ module.exports = function(app) {
                 },
                 function(err, data) {
                     notifications.friendId = friendId;
+                    notifications.userName = userName;
+                    notifications.descriptionRoom = description;
                     app.socket.io.emit('notifiedUser', notifications); // notificate the users
                 });
         },

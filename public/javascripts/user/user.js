@@ -13,7 +13,7 @@ socket.on('notifiedUser', function(data) {
     console.log(data);
     if(data.friendId == user.facebookId){
     	 console.info('you good');
-     console.info(user.facebookId);
-        notif.innerHTML = data.room + data.notifier ;
+     console.info(data);
+        notif.innerHTML = data.userName +' vous invite à rejoindre sa Room <a href="/room/'+data.room+'">'+data.descriptionRoom+'</a>';
     }
 });

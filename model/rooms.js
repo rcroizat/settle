@@ -20,7 +20,7 @@ module.exports = function(app) {
             });
         },
 
-        insertChatRoom: function(userId, name, description, latitude, longitude, friendId, callback) {
+        insertChatRoom: function(userName, userId, name, description, latitude, longitude, friendId, callback) {
 
             var friendId = friendId;
             this.collections.chatRooms.insert({
@@ -33,10 +33,10 @@ module.exports = function(app) {
                 console.log(result);
                 if(Array.isArray(friendId) == true){
                     for (var i = 0; i < friendId.length; i++) {
-                      app.users.notificateFriend(friendId[i], userId, result.insertedIds[0] );
+                      app.users.notificateFriend(friendId[i], userId, result.insertedIds[0], userName, description);
                     };
                 }else{
-                      app.users.notificateFriend(friendId, userId, result.insertedIds[0] );
+                      app.users.notificateFriend(friendId, userId, result.insertedIds[0], userName, description );
                 }
                 callback(result);
             });
