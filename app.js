@@ -6,11 +6,10 @@ app.mode = 'dev';
 app.server = require('./server')(app);
 app.server.create();
 
+app.db = require('./model/db')(app);
+app.db.connect();
 app.rooms = require('./model/rooms')(app);
-app.rooms.create();
-
 app.users = require('./model/users')(app);
-app.users.create();
 
 // SOCKET
 app.chat = require('./socket/chat')(app);

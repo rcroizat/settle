@@ -5,6 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
+var MongoClient = require('mongodb').MongoClient,
+    assert = require('assert');
 
 module.exports = function(app) {
     'use strict';
@@ -12,14 +14,13 @@ module.exports = function(app) {
     return {
 
         _server: null,
+        _db:null,
         create: function() {
-
             this._server = http.createServer(exp);
             this.config();
             this.route();
             this.listen();
         },
-
         listen: function() {
             var port = 8080;
             if (app.mode === 'dev') {
@@ -42,10 +43,10 @@ module.exports = function(app) {
                 res.render('index', { title: 'Settle' });
             });
             exp.get('/map', function(req, res, next) {
-                res.render('map', { title: 'Evénement à proximités' });
+                res.render('map', { title: 'Chercher des rooms' });
             });
             exp.get('/room/create', function(req, res, next) {
-                res.render('create', { title: 'Créer un chat' });
+                res.render('create', { title: 'Créer une chat room' });
             });
             exp.post('/room/create', function(req, res, next) {
                 //creating the room
@@ -55,17 +56,18 @@ module.exports = function(app) {
                 var userId = req.body.userId;
                 var latitude = req.body.latitude;
                 var longitude = req.body.longitude;
-                app.rooms.insertChatRoom(userId, name, description, latitude, longitude, friendId, function(data){
+                app.rooms.insertChatRoom(userId, name, description, latitude, longitude, friendId, function(data) {
                     var roomId = data.insertedIds;
                     res.redirect('/room/' + roomId);
                 });
             });
             exp.get('/room/:id', function(req, res, next) {
                 var id = req.params.id;
-                app.rooms.findChatRoom(id, function(chatRoom) {
-                    res.render('room', { title: chatRoom.name, room: chatRoom });
-                });
+                var ObjectId = require('mongodb').ObjectID;
 
+                app.rooms.findChatRoom({ "_id": ObjectId(id) }, function(chatRoom) {
+                    res.render('room', { title: 'Settle | ' + chatRoom.name, room: chatRoom });
+                });
             });
         }
     }
