@@ -52,9 +52,10 @@ module.exports = function(app) {
                 var name = req.body.name;
                 var description = req.body.description;
                 var friendId = req.body.friendId;
+                var userId = req.body.userId;
                 var latitude = req.body.latitude;
                 var longitude = req.body.longitude;
-                app.rooms.insertChatRoom(name, description, latitude, longitude, friendId, function(data) {
+                app.rooms.insertChatRoom(userId, name, description, latitude, longitude, friendId, function(data){
                     var roomId = data.insertedIds;
                     res.redirect('/room/' + roomId);
                 });

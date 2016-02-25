@@ -34,27 +34,18 @@ module.exports = function(app) {
             });
 
         },
-        notificateFriend: function(friendId, roomId) {
-                    console.log(friendId);
+        notificateFriend: function(friendId, notifierId, roomId ) {
+                    console.log("ROOM ID");
                     console.log(roomId);
-            this.collections.users.updateOne({ facebookId: friendId }, {
-                    $push: { notification: roomId }
+                    var notifications ={};
+                    notifications.notifier = notifierId;
+                    notifications.room = roomId;
+                this.collections.users.updateOne({ facebookId: friendId }, {
+                    $push: { 'notifications': notifications  }
                 },
                 function(err, data) {
-                    app.socket.io.emit('notifiedUser', friendId);
-                    console.log('friend socket');
-                    console.log(friendId);
-                    console.log(data);
-                });
-        },
-        findNotif: function(facebookId, roomId) {
-            this.collections.users.updateOne({ facebookId: friendId }, {
-                    $push: { notification: roomId }
-                },
-                function(err, data) {
-                    app.socket.io.emit('notifiedUser', friendId);
-                    console.log('friend notified');
-                    console.log(data);
+                    notifications.friendId = friendId;
+                    app.socket.io.emit('notifiedUser', notifications); // notificate the users
                 });
         },
         findUser: function(user, callback) {
@@ -65,6 +56,11 @@ module.exports = function(app) {
         findUsers: function(query, callback) {
             this.collections.users.find(query).toArray(function(err, users) {
                 console.log('users');
+                callback(users);
+            });
+        },
+        findNotifications: function(facebookId, callback) {
+           this.collections.users.findOne({ facebookId: facebookId}, function(err, result) {
                 callback(users);
             });
         },
