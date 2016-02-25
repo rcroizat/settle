@@ -7,10 +7,13 @@ if (document.location.hostname == "localhost") {
 }
 var socket = io.connect(url + ':' + port + '/');
 socket.on('notifiedUser', function(data) {
-    console.info('you good');
+   
     var notif = document.getElementById('notif');
     var user = JSON.parse(window.localStorage['userData'] || '{}');
-    if(data == user.facebookId){
-        notif.innerHTML = '1';
+    console.log(data);
+    if(data.friendId == user.facebookId){
+    	 console.info('you good');
+     console.info(user.facebookId);
+        notif.innerHTML = data.room + data.notifier ;
     }
 });

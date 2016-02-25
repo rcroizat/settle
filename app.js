@@ -6,10 +6,10 @@ app.mode = 'dev';
 app.server = require('./server')(app);
 app.server.create();
 
-app.rooms = require('./server/rooms')(app);
+app.rooms = require('./model/rooms')(app);
 app.rooms.create();
 
-app.users = require('./server/users')(app);
+app.users = require('./model/users')(app);
 app.users.create();
 
 
