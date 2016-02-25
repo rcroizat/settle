@@ -14,6 +14,6 @@ socket.on('notifiedUser', function(data) {
     if(data.friendId == user.facebookId){
     	 console.info('you good');
      console.info(data);
-        notif.innerHTML = data.userName +' vous invite à rejoindre sa Room <a href="/room/'+data.room+'">'+data.descriptionRoom+'</a>';
+        notif.innerHTML += data.userName +' vous invite à rejoindre sa Room <a href="/room/'+data.room+'">'+data.descriptionRoom+'</a><br>';
     }
 });
