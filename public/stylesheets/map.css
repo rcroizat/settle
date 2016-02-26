@@ -1,6 +1,8 @@
+.gmnoprint {
+    display: none
+}
 
-  .gmnoprint{display: none}
-  .controls {
+.controls {
     margin-top: 10px;
     border: 1px solid transparent;
     border-radius: 2px 0 0 2px;
@@ -9,114 +11,111 @@
     height: 32px;
     outline: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  }
+}
 
-  #pac-input {
+#pac-input {
     background-color: #fff;
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
+    padding: 0 11px;
     text-overflow: ellipsis;
-    width: 300px;
-  }
+    width: 90%;
+}
 
-  #pac-input:focus {
+#pac-input:focus {
     border-color: #4d90fe;
-  }
+}
 
- 
-  #type-selector {
+#type-selector {
     color: #fff;
     background-color: #4d90fe;
     padding: 5px 11px 0px 11px;
-  }
+}
 
-  #type-selector label {
+#type-selector label {
     font-size: 13px;
     font-weight: 300;
-  }
-  #target {
+}
+
+#target {
     width: 345px;
-  }
+}
 
-
-
-  #bigFooter {
-    display: table-cell;   
+#bigFooter {
+    display: table-cell;
     vertical-align: middle;
-  }
+}
 
+.clear {
+    clear: both
+}
 
-
-
-  .clear{clear: both}
-  #map {
+#map {
     height: 40%;
-  }
-  #chatRoomList {
+}
+
+#chatRoomList {
     height: 40%;
     overflow: hidden;
     overflow-y: scroll;
-  }
+}
 
-
-  .chatRoom{
+.chatRoom {
     border-bottom: 1px solid #dedede;
     padding: 15px;
     display: block;
     text-decoration: none;
-    color:rgba(0,0,0,0.87);
-  }
-  .chatRoom:nth-child(odd){
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.chatRoom:nth-child(odd) {
     background-color: #dedede;
-  }
+}
 
+#createEvent {
+    background-color: #106CC8;
+    cursor: pointer;
+    width: 100%;
+    height: 8%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    display: table;
+}
 
-  #createEvent{
-  	background-color: #106CC8;
-  	cursor: pointer;
-  	width: 100%;
-  	height: 10%;
-  	text-align: center; 
-  	font-weight: bold; 
-  	font-size: 18px;
-  	display: table;
-  }
+#createEvent a {
+    text-decoration: none;
+    color: white;
+    vertical-align: middle;
+}
 
-  #createEvent a{
-  	text-decoration:none;
-  	color:white;
-  	vertical-align: middle;
-  }
+#buttons {
+    height: 5%;
+    text-align: right;
+}
 
-  #buttons{
-  	height: 4%;
-  	text-align:right;
-  }
+.filterChatRooms {
+    display: inline;
+    height: 100%;
+    background-color: #F57F17;
+    color: white;
+    font-family: Roboto;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 4px;
+    text-decoration: none;
+}
 
-  .filterChatRooms{
-	  display:inline;
-	  height:100%;
-	  background-color : #F57F17;
-	  color:white;
-	  font-family: Roboto;
-	  -webkit-border-radius: 8;
-	  -moz-border-radius: 8;
-	  border-radius: 4px;
-	  text-decoration: none;
-  }
-
-  .users{
-	float: right;
+.users {
+    float: right;
     padding-right: 7%;
     background-image: url(../images/users.svg);
     background-repeat: no-repeat;
     background-position: right;
     background-size: 25%;
-  }
+}
 
-  .name{
-	text-decoration: none;
-  }
+.name {
+    text-decoration: none;
+}
