@@ -8,23 +8,17 @@
 
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBavdsZji-wJshos01mjqZ_kS1--pmdcwY&libraries=places,geometry&callback=initMap"></script>
-<nav id="navbar"><!-- 
-  <div id="notif"></div> -->
- Room à proximitées
+<nav id="navbar"> <div id="notif"></div> 
+  <span id="bigTitle">Room à proximitées</span>
 </nav>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 <div id="buttons">
-<!--  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored filterChatRooms" filter="users">
-     Popularité
-   </button>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored filterChatRooms" filter="distance">
-     Distance
-   </button> -->
-
-<button class="filterChatRooms" filter="users">Popularité</button>
-<button class="filterChatRooms" filter="distance">Distance</button>
+  <button class="filterChatRooms" filter="users">Popularité</button>
+  <button class="filterChatRooms" filter="distance">Distance</button>
 </div>
 <div id="chatRoomList"></div>
-<div id="createEvent"><a href="/room/create">CRÉER UN ÉVÈNEMENT</a></div>
+  {% block footer %}
+    <div id="createEvent"><span id="bigFooter"><a  href="/room/create">CRÉER UN ÉVÈNEMENT</a></span></div>
+  {% endblock %}
 {% endblock %}
