@@ -16,7 +16,17 @@ map.socket.on('chatRoomGet', function(data) {
     map.setChatRoomsList(map.chatRooms, map.userPosition);
 });
 
+map.socket.on('newChatRoom', function(data) {
+    map.chatRooms = data;
+    map.setChatRoomsList(map.chatRooms, map.userPosition);
+});
+
 map.socket.on('chatRoomUserNumberUpdate', function(data) {
+    for (var i = 0; i < map.chatRooms.length; i++) {
+        if(map.chatRooms[i]._id === data.roomId){
+            map.chatRooms[i].users = data.users;
+        }
+    }
     map.updateRoomUsers(data.roomId, data.users);
 });
 
@@ -124,6 +134,7 @@ map.setChatRoomsList = function(chatRooms, mapCenter, filter) {
 }
 
 map.updateRoomUsers = function(roomId, usersNumber) {
+    map.chat
     $('#' + roomId + ' .users').html(usersNumber + ' Users');
 }
 

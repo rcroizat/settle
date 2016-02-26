@@ -7,7 +7,7 @@ module.exports = function(app) {
                 if (result !== null) {
                     callback('exist');
                 } else {
-                    app.users.collections.users.insert(
+                    app.db._collections.users.insert(
                         user,
                         function(err, result) {
                             callback(result);
@@ -18,12 +18,10 @@ module.exports = function(app) {
         },
 
         notificateFriend: function(friendId, notifierId, roomId, userName, description) {
-                    console.log("ROOM ID");
-                    console.log(roomId);
                     var notifications ={};
                     notifications.notifier = notifierId;
                     notifications.room = roomId;
-                this.collections.users.updateOne({ facebookId: friendId }, {
+                app.db._collections.users.updateOne({ facebookId: friendId }, {
                     $push: { 'notifications': notifications  }
                 },
                 function(err, data) {

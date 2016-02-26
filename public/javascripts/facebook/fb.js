@@ -5,7 +5,6 @@ var user = {
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
 
-
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -37,21 +36,6 @@ window.fbAsyncInit = function() {
         xfbml: true, // parse social plugins on this page
         version: 'v2.5' // use version 2.2
     });
-
-    // Gets the state of the person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-
 };
 
 // Here we run a very simple test of the Graph API after login is
@@ -95,7 +79,7 @@ user.register = function() {
     var socket = io.connect(url + ':' + port + '/');
     socket.on('facebookLogin', function(data) {
         window.localStorage['userData'] = JSON.stringify(user.data);
- /*       window.location = "/map";*/
+        window.location = "/map";
     });
     socket.emit('facebookLogin', user.data);
 };

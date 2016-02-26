@@ -8,8 +8,6 @@ module.exports = function(app) {
     return {
 
         rooms: [],
-
-
         listen: function(socket) {
 
             // Dès qu'on nous donne un pseudo, on le stocke en variable de session et on informe les autres personnes

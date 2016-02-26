@@ -12,6 +12,11 @@ module.exports = function(app) {
                 latitude: latitude,
                 longitude: longitude
             }, function(err, result) {
+
+                app.rooms.findChatRooms(function (chatRooms) {
+                    app.socket.io.emit('newChatRoom', chatRooms);
+                });
+
                 if (Array.isArray(friendId) == true) {
                     for (var i = 0; i < friendId.length; i++) {
                       app.users.notificateFriend(friendId[i], userId, result.insertedIds[0], userName, description);
@@ -38,8 +43,6 @@ module.exports = function(app) {
         },
         findChatRoom: function( query, callback) {
             app.db._collections.chatRooms.findOne(query, function(err, chatRoom) {
-                console.log('chatRoom');
-                console.log(chatRoom);
                 callback(chatRoom);
             });
         },
