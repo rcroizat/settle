@@ -9,14 +9,28 @@ body {
     clear: both
 }
 
-.roomContainer {    padding: 15px;}
-
-.roomContainer h1 {
-    font-size: 21px
+.roomInfos {
+    border-bottom: 1px solid #ccc;
+    padding: 2% 10px;
+    height: 6%;
+    width: 100%;
 }
 
-.roomContainer h2 {
-    font-size: 16px
+.roomInfos h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.roomInfos h2 {
+    font-size: 12px;
+    margin: 0;
+}
+
+.roomContainer {
+    padding: 2% 15px;
+    height: 82%;
+    max-height: 82%;
+    overflow-y: scroll;
 }
 
 .chat {
@@ -51,19 +65,19 @@ body {
 }
 
 #formulaire_chat {
-    position: fixed;
-    bottom: 0px;
     width: 100%;
+    height: 7%;
 }
 
 #message {
     width: 75%;
     display: block;
     float: left;
-    border: 1px solid #eee;
+    border: 1px solid #ccc;
     margin: 0;
-    padding: 15px 0 15px 5%;
+    padding: 2% 0 2% 5%;
     box-sizing: border-box;
+    height: 100%;
 }
 
 #envoi_message {
@@ -71,23 +85,30 @@ body {
     float: left;
     border: 0;
     margin: 0;
-    padding: 16px 0;
+    padding: 2% 0;
     background-color: #106CC8;
     color: #fff;
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #333;
+}
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #333;
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #333;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  color: #333;
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #333;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  color: #333;
-}
-:-moz-placeholder { /* Firefox 18- */
-  color: #333;
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #333;
 }
