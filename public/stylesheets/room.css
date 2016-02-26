@@ -9,27 +9,10 @@ body {
     clear: both
 }
 
-.roomInfos {
-    border-bottom: 1px solid #ccc;
-    padding: 2% 10px;
-    height: 6%;
-    width: 100%;
-}
-
-.roomInfos h1 {
-    font-size: 18px;
-    margin: 0;
-}
-
-.roomInfos h2 {
-    font-size: 12px;
-    margin: 0;
-}
-
 .roomContainer {
     padding: 2% 15px;
-    height: 82%;
-    max-height: 82%;
+    height: 83%;
+    max-height: 83%;
     overflow-y: scroll;
 }
 
@@ -67,6 +50,8 @@ body {
 #formulaire_chat {
     width: 100%;
     height: 7%;
+    position: fixed;
+    bottom: 0;
 }
 
 #message {
