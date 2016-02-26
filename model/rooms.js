@@ -4,8 +4,6 @@ module.exports = function(app) {
     return {
 
         insertChatRoom: function(userName, userId, name, description, latitude, longitude, friendId, callback) {
-
-            var friendId = friendId;
             app.db._collections.chatRooms.insert({
                 name: name,
                 description: description,
@@ -16,6 +14,9 @@ module.exports = function(app) {
                 app.rooms.findChatRooms(function (chatRooms) {
                     app.socket.io.emit('newChatRoom', chatRooms);
                 });
+
+                console.log('friendId');
+                console.log(friendId);
 
                 if (Array.isArray(friendId) == true) {
                     for (var i = 0; i < friendId.length; i++) {

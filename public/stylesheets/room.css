@@ -1,0 +1,93 @@
+body {
+    font: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #333
+}
+
+.clear {
+    clear: both
+}
+
+.roomContainer {    padding: 15px;}
+
+.roomContainer h1 {
+    font-size: 21px
+}
+
+.roomContainer h2 {
+    font-size: 16px
+}
+
+.chat {
+    padding: 5px 0px;
+}
+
+.chat .profilPicture {
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.chat .date {
+    display: inline-block;
+    color: #9E9A9A
+}
+
+.chat .username {
+    display: inline-block;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.chat .message {
+    vertical-align: top;
+    padding-top: 5px;
+}
+
+.chat .user {
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#formulaire_chat {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+#message {
+    width: 75%;
+    display: block;
+    float: left;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 15px 0 15px 5%;
+    box-sizing: border-box;
+}
+
+#envoi_message {
+    width: 25%;
+    float: left;
+    border: 0;
+    margin: 0;
+    padding: 16px 0;
+    background-color: #106CC8;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #333;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #333;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #333;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #333;
+}

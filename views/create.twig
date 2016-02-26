@@ -3,44 +3,16 @@
 <form method="POST" action="create">
   Nom<input type="text" name="name" required>
   Description<input type="text" name="description" required>
-
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
   <input type="hidden" name="userId" id="userId"  value="">
   <input type="hidden" name="userName" id="userName"  value="">
-
-   Inviter des amis
-<div id="friends">
-	<ul>
-	</ul>
-</div>
-
-
- <input type="submit" value="Submit">
- <script>
-navigator.geolocation.getCurrentPosition(function(position) {
-	document.getElementById('longitude').value = position.coords.longitude;
-	document.getElementById('latitude').value = position.coords.latitude;
-});
-
-
-
-var user = JSON.parse(localStorage['userData'] || '{}');
-
-var friend = function(){
-    var userId = document.getElementById('userId');
-    var userName = document.getElementById('userName');
-    userId.value = user.facebookId;
-    userName.value = user.name;
-	user.facebookFriends.forEach(logArrayElements);
-}
-
-var logArrayElements = function (element, index, array) {
-    var friend = document.getElementById('friends');
-    friend.innerHTML += '<li><input type="checkbox" name="friendId" value="'+element.id+'"><img src="http://graph.facebook.com/'+element.id+'/picture"/>'+element.name+'</li>';
-};
-
-friend();
- </script>
+  <h1>Inviter des amis</h1>
+  <div>
+    <ul id="friendsList">
+    </ul>
+  </div>
+  <input type="submit" value="Submit">
 </form>
+<script src="/javascripts/createRoom/createRoom.js"></script>
 {% endblock %}

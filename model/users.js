@@ -4,6 +4,7 @@ module.exports = function(app) {
     return {
         registerUser: function(user, callback) {
             app.db._collections.users.findOne({ facebookId: user.facebookId }, function(err, result) {
+                // Check if user exist, if not insert in the DB
                 if (result !== null) {
                     callback('exist');
                 } else {
@@ -14,15 +15,14 @@ module.exports = function(app) {
                         });
                 }
             });
-
         },
 
         notificateFriend: function(friendId, notifierId, roomId, userName, description) {
-                    var notifications ={};
-                    notifications.notifier = notifierId;
-                    notifications.room = roomId;
-                app.db._collections.users.updateOne({ facebookId: friendId }, {
-                    $push: { 'notifications': notifications  }
+            var notifications = {};
+            notifications.notifier = notifierId;
+            notifications.room = roomId;
+            app.db._collections.users.updateOne({ facebookId: friendId }, {
+                    $push: { 'notifications': notifications }
                 },
                 function(err, data) {
                     notifications.friendId = friendId;

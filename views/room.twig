@@ -1,23 +1,26 @@
 {% extends "layout.twig" %}
+{% block head %}
+{{parent ()}}
+<link rel="stylesheet"  type="text/css" href="/stylesheets/room.css">
+{% endblock %}
 {% block content %}
-<style>
 
-</style>
+<div class="roomContainer">
+	<h1>{{room.name}}</h1>
+	<h2>{{room.description}}</h2>
 
-<h1>Name : {{room.name}}</h1>
-<h1>Description : {{room.description}}</h1>
+	<h1>Listes des users connectés :</h1>
+	<section id="zone_users">   
+	</section>
+
+	<section id="zone_chat">
+	</section>
+</div>
 
 <form action="/" method="post" id="formulaire_chat">
     <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus />
     <input type="submit" id="envoi_message" value="Envoyer" />
 </form>
 
-<h1>Listes des users connectés :</h1>
-<section id="zone_users">   
-</section>
-
-<section id="zone_chat">
-</section>
-
-<script src="../javascripts/chat/chat.js"></script>
+<script src="../javascripts/room/room.js"></script>
 {% endblock %}

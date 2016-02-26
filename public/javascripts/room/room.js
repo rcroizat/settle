@@ -1,5 +1,5 @@
 // Connexion à socket.io
-
+'use strict';
 var roomId = location.pathname.split('/');
 roomId = roomId[roomId.length - 1];
 
@@ -34,15 +34,17 @@ socket.on('message', function(data) {
 socket.on('isTyping', function(pseudo) {
 });
 
+$("#message").keydown(function() {
+    socket.emit('isTyping'); // Istyping
+});
+
 socket.on('userDeconnection', function(id) {
     $('#' + id).remove();
 });
 
-
-
 // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
 $('#formulaire_chat').submit(function() {
-
+    console.log("formulaire_chat");
     var message = $('#message').val();
 
     if (message !== '') {
@@ -53,11 +55,9 @@ $('#formulaire_chat').submit(function() {
     return false; // Permet de bloquer l'envoi "classique" du formulaire
 });
 
-$("#message").keydown(function() {
-    socket.emit('isTyping'); // Istyping
-});
+
 
 // Ajoute un message dans la page
 function insereMessage(date, user, message) {
-    $('#zone_chat').prepend('<img src="' + user.profilPicture + '" height="42" width="42"><p><span>' + date + '</span> <strong>' + user.name + '</strong> ' + message + '</p>');
+    $('#zone_chat').prepend('<div class="chat"><img class="profilPicture" src="' + user.profilPicture + '"><div class="user"><span class="username">' + user.name + '</span><span class="date">' + date + '</span><div class="message"> ' + message + '</div></div></div><div class="clear"></div>');
 }

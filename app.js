@@ -2,7 +2,6 @@ var app = {};
 app.mode = 'dev';
 
 // SERVER
-
 app.server = require('./server')(app);
 app.server.create();
 
@@ -17,6 +16,5 @@ app.socketRooms = require('./socket/rooms')(app);
 app.socketUsers = require('./socket/users')(app);
 app.socket = require('./socket/socket')(app);
 app.socket.create();
-
 
 module.exports = app;
