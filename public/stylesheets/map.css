@@ -26,10 +26,7 @@
     border-color: #4d90fe;
   }
 
-  .pac-container {
-    font-family: Roboto;
-  }
-
+ 
   #type-selector {
     color: #fff;
     background-color: #4d90fe;
@@ -37,7 +34,6 @@
   }
 
   #type-selector label {
-    font-family: Roboto;
     font-size: 13px;
     font-weight: 300;
   }
@@ -51,9 +47,12 @@
     height: 7%;
     background-color: #106CC8;
     color: #fff;
+    display:inline-block;
+    vertical-align:middle;
     position:relative;
     text-align:center;
     font-weight:bold;
+    line-height:1.2; /* on rétablit le line-height */
   }
 
   #notif {
@@ -74,6 +73,8 @@
     overflow: hidden;
     overflow-y: scroll;
   }
+
+
   .chatRoom{
     border-bottom: 1px solid #dedede;
     padding: 15px;
@@ -83,11 +84,6 @@
     background-color: #dedede;
   }
 
-  .filterChatRooms{
-  	display:inline;
-  	height:4%;
-  	width:50%;
-  }
 
   #createEvent{
   	background-color: #106CC8;
@@ -97,10 +93,26 @@
   	font-weight: bold; 
   	font-size: 18px;
   }
+
   #createEvent a{
   	text-decoration:none;
   	color:white;
   	vertical-align: middle;
   }
 
-  #createEvent span{vertical-align:middle }
+  #buttons{
+  	height: 4%;
+  	text-align:right;
+  }
+
+  .filterChatRooms{
+  	display:inline;
+  	height:100%;
+  	background-color : #F57F17;
+  	color:white;
+font-family: Roboto;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 4px;
+  text-decoration: none;
+  }
