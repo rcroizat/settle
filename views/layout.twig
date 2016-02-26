@@ -12,6 +12,9 @@
         {% endblock %}
     </head>
     <body>
+        {% block navbar %}<nav id="navbar"> <div id="notif"></div> 
+            <span id="bigTitle">{{title}}</span>
+        </nav>{% endblock %}
         {% block content %}{% endblock %}
         <div id="footer">
             {% block footer %}

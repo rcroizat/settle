@@ -51,7 +51,7 @@ module.exports = function(app) {
                 res.render('index', { title: 'Settle' });
             });
             exp.get('/map', function(req, res, next) {
-                res.render('map', { title: 'Chercher des rooms' });
+                res.render('map', { title: 'Rooms' });
             });
             exp.get('/room/create', function(req, res, next) {
                 res.render('create', { title: 'Créer une chat room' });
@@ -79,7 +79,7 @@ module.exports = function(app) {
                 var ObjectId = require('mongodb').ObjectID;
 
                 app.rooms.findChatRoom({ "_id": ObjectId(id) }, function(chatRoom) {
-                    res.render('room', { title: 'Settle | ' + chatRoom.name, room: chatRoom });
+                    res.render('room', { title: chatRoom.name, room: chatRoom });
                 });
             });
         }
