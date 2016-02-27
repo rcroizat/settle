@@ -54,7 +54,7 @@ module.exports = function(app) {
                 res.render('map', { title: 'Rooms' });
             });
             exp.get('/room/create', function(req, res, next) {
-                res.render('create', { title: 'Créer une chat room' });
+                res.render('create', { title: 'Créer une room' });
             });
             exp.post('/room/create', function(req, res, next) {
                 // get the param from the request

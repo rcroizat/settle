@@ -1,13 +1,13 @@
 {% extends "layout.twig" %}
 {% block content %}
 <form method="POST" action="create">
-  Nom<input type="text" name="name" required>
+  Nom<input type="text" name="name" required><br>
   Description<input type="text" name="description" required>
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
   <input type="hidden" name="userId" id="userId"  value="">
   <input type="hidden" name="userName" id="userName"  value="">
-  <h1>Inviter des amis</h1>
+  Inviter des amis
   <div>
     <ul id="friendsList">
     </ul>
