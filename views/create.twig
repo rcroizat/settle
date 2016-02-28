@@ -1,8 +1,23 @@
 {% extends "layout.twig" %}
+{% block head %}
+{{parent()}}
+  <link rel="stylesheet" type="text/css" href="../stylesheets/create.css">
+{% endblock %}
 {% block content %}
 <form method="POST" action="create">
-  Nom<input type="text" name="name" required><br>
-  Description<input type="text" name="description" required>
+  <div>
+    <label class="desc" id="NomLabel" for="Nom">Nom</label>
+    <div>
+      <input id="Field1"  name="name" required type="text" class="field text fn" size="8" tabindex="1">
+    </div>
+  </div>
+  <div>
+    <label class="desc" id="DescLabel" for="Nom">Description</label>
+    <div>
+      <input id="Field1"   name="description" required type="text" class="field text fn"  size="8" tabindex="1">
+    </div>
+  </div>
+  
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
   <input type="hidden" name="userId" id="userId"  value="">
@@ -12,7 +27,7 @@
     <ul id="friendsList">
     </ul>
   </div>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Créer ma room" id="submitForm">
 </form>
-<script src="/javascripts/createRoom/createRoom.js"></script>
+<script src="../javascripts/createRoom/createRoom.js"></script
 {% endblock %}

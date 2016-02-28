@@ -21,5 +21,10 @@
     height: 5%;
     position:absolute;
     float:right;
-    color:red;
+    left: 70%;
+    font-size: 0.6em;
+  }
+  #notif a {
+    text-decoration: none;
+    color:white;
   }
