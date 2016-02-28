@@ -1,35 +1,50 @@
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+form {
+    padding: 15px;
+    max-height: 85%;
+    overflow-y: scroll;
 }
 
 form > div {
-  clear: both;
-  overflow: hidden;
-  padding: 1px;
-  margin: 0 0 10px 0;
+    clear: both;
+    overflow: hidden;
+    padding: 1px;
 }
+
 form > div > fieldset > div > div {
-  margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 }
+
 form > div > label,
 legend {
-	width: 25%;
-  float: left;
-  padding-right: 10px;
+    width: 25%;
+    float: left;
+    padding-right: 10px;
 }
+
 form > div > div,
 form > div > fieldset > div {
-  width: 75%;
-  float: right;
+    width: 75%;
+    float: right;
 }
+
 form > div > fieldset label {
-	font-size: 90%;
+    font-size: 90%;
 }
+
 fieldset {
-	border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
+}
+
+#friendsList li {
+    padding-bottom: 10px;
 }
 
 input[type=text],
@@ -37,72 +52,142 @@ input[type=email],
 input[type=url],
 input[type=password],
 textarea {
-	width: 100%;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
+
 input[type=text],
 input[type=email],
 input[type=url],
 input[type=password] {
-  width: 50%;
+    width: 50%;
 }
+
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=url]:focus,
 input[type=password]:focus,
 textarea:focus {
-  outline: 0;
-  border-color: #4697e4;
+    outline: 0;
+    border-color: #4697e4;
 }
 
-@media (max-width: 600px) {
-  form > div {
-    margin: 0 0 15px 0; 
-  }
-  form > div > label,
-  legend {
-	  width: 100%;
-    float: none;
-    margin: 0 0 5px 0;
-  }
-  form > div > div,
-  form > div > fieldset > div {
+form > div > label,
+legend {
     width: 100%;
     float: none;
-  }
-  input[type=text],
-  input[type=email],
-  input[type=url],
-  input[type=password],
-  textarea,
-  select {
-    width: 100%; 
-  }
+    margin: 0 0 5px 0;
+}
+
+form > div > div,
+form > div > fieldset > div {
+    width: 100%;
+    float: none;
+}
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+textarea,
+select {
+    width: 100%;
+    padding: 5px;
+}
+
+.row{
+  padding-bottom: 15px;
+}
+
 }
 @media (min-width: 1200px) {
-  form > div > label,
-	legend {
-  	text-align: right;
-  }
+    form > div > label,
+    legend {
+        text-align: right;
+    }
 }
-
-
-li{
-
-  list-style-type: none;
+li {
+    list-style-type: none;
 }
-#submitForm{
-    width: 25%;
-    float: left;
+#submitForm {
     border: 0;
     margin: 0;
-    padding: 2% 0;
     background-color: #106CC8;
     color: #fff;
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     height: 100%;
+    text-decoration: none;
+    color: white;
+    vertical-align: middle;
+}
+#bigFooter {
+    display: table-cell;
+    vertical-align: middle;
+}
+#createRoom {
+    background-color: #106CC8;
+    cursor: pointer;
+    width: 100%;
+    height: 8%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    display: table;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+.friendInvit {
+    padding-bottom: 15px;
+}
+.friendInvit img {
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+/*CHECKBOX*/
+.blaubarry {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+.blaubarry + label {
+    display: inline-block;
+    position: relative;
+    width: 5rem;
+    height: 2.5rem;
+    border-radius: 3rem;
+    background-color: #4387c5;
+}
+.blaubarry + label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 3rem;
+    background-color: #FFF;
+}
+.blaubarry + label:after {
+    content: 'Non';
+    display: block;
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    font-family: Roboto;
+    font-size: 1rem;
+    color: #FFF;
+}
+.blaubarry[type="checkbox"]:checked + label:before {
+    left: 3rem;
+}
+.blaubarry[type="checkbox"]:checked + label:after {
+    content: 'Oui';
+    left: 1rem;
 }

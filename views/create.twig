@@ -5,13 +5,13 @@
 {% endblock %}
 {% block content %}
 <form method="POST" action="create">
-  <div>
+  <div class="row">
     <label class="desc" id="NomLabel" for="Nom">Nom</label>
     <div>
       <input id="Field1"  name="name" required type="text" class="field text fn" size="8" tabindex="1">
     </div>
   </div>
-  <div>
+  <div class="row">
     <label class="desc" id="DescLabel" for="Nom">Description</label>
     <div>
       <input id="Field1"   name="description" required type="text" class="field text fn"  size="8" tabindex="1">
@@ -22,12 +22,15 @@
   <input type="hidden" name="longitude" id="longitude">
   <input type="hidden" name="userId" id="userId"  value="">
   <input type="hidden" name="userName" id="userName"  value="">
-  Inviter des amis
-  <div>
-    <ul id="friendsList">
-    </ul>
+  <div class="row">
+    Inviter des amis
+    <div>
+      <ul id="friendsList">
+      </ul>
+    </div>
   </div>
-  <input type="submit" value="Créer ma room" id="submitForm">
+  
+  <div id="createRoom"><span id="bigFooter"><input type="submit" value="CRÉER MA ROOM" id="submitForm"></span></div>
 </form>
 <script src="../javascripts/createRoom/createRoom.js"></script
 {% endblock %}
