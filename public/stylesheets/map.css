@@ -109,11 +109,12 @@
 
 .users {
     float: right;
-    padding-right: 7%;
+    padding-right: 25px;
     background-image: url(../images/users.svg);
     background-repeat: no-repeat;
     background-position: right;
-    background-size: 60%;
+    background-size: 30px;
+    width: 20px;
 }
 
 .name {
