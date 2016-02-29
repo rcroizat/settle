@@ -98,9 +98,10 @@ select {
     padding: 5px;
 }
 
-.row{
-  padding-bottom: 15px;
+.row {
+    padding-bottom: 15px;
 }
+
 
 }
 @media (min-width: 1200px) {

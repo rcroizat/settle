@@ -1,5 +1,5 @@
-// Connexion à socket.io
 'use strict';
+// get room id from URL
 var roomId = location.pathname.split('/');
 roomId = roomId[roomId.length - 1];
 
@@ -13,37 +13,31 @@ var user = JSON.parse(window.localStorage['userData'] || '{}');
 
 socket.emit('userConnected', roomId, user);
 
-// Quand un nouveau client se connecte, on affiche l'information
+// When a user logs in, display the info in the chat
 socket.on('userConnected', function(data) {
     var user = data.user;
     $('#zone_chat').append('<p><em>' + user.name + ' a rejoint le Chat !</em></p>');
     $(".roomContainer").animate({ scrollTop: $(".roomContainer").height() }, 1000);
 })
 
-// Quand on reçoit un message, on l'insère dans la page
+// When we receive a message, insert it in the chat and scroll the page if we have to
 socket.on('message', function(data) {
     insereMessage(data.date, data.user, data.message);
     $(".roomContainer").animate({ scrollTop: $(".roomContainer").height() }, 1000);
 });
 
-socket.on('userDeconnection', function(id) {
-    $('#' + id).remove();
-});
-
-// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
 $('#formulaire_chat').submit(function() {
-    console.log("formulaire_chat");
     var message = $('#message').val();
 
     if (message !== '') {
-        socket.emit('message', message); // Transmet le message aux autres
-        $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+        socket.emit('message', message);
+        $('#message').val('').focus(); // Empty chat input and focus it
     }
 
-    return false; // Permet de bloquer l'envoi "classique" du formulaire
+    return false;
 });
 
-// Ajoute un message dans la page
+// Insert a message in the chat
 function insereMessage(date, user, message) {
     $('#zone_chat').append('<div class="chat"><img class="profilPicture" src="' + user.profilPicture + '"><div class="user"><span class="username">' + user.name + '</span><span class="date">' + date + '</span><div class="message"> ' + message + '</div></div></div><div class="clear"></div>');
 }

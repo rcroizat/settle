@@ -1,30 +1,30 @@
-
-  #navbar {
+#navbar {
     width: 100%;
     height: 7%;
     background-color: #106CC8;
     color: #fff;
     display: table;
-    position:relative;
-    text-align:center;
-    font-weight:bold;
-    line-height:1.2; 
-  }
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.2;
+}
 
-  #bigTitle {
-    display: table-cell;   
+#bigTitle {
+    display: table-cell;
     vertical-align: middle;
-  }
-  
-  #notif {
+}
+
+#notif {
     width: 30%;
     height: 5%;
-    position:absolute;
-    float:right;
+    position: absolute;
+    float: right;
     left: 70%;
     font-size: 0.6em;
-  }
-  #notif a {
+}
+
+#notif a {
     text-decoration: none;
-    color:white;
-  }
+    color: white;
+}
