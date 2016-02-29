@@ -1,10 +1,13 @@
+// Connect to socket io, detect if we are working on localhost or if we are in prod
 var url = 'https://settle-alaurelut.c9users.io';
-var port = 8080;
 if (document.location.hostname == "localhost") {
     url = 'localhost';
     var port = 3000;
+    var socket = io.connect(url + ':' + port + '/');
+}else{
+    var socket = io.connect(url);
 }
-var socket = io.connect(url + ':' + port + '/');
+
 socket.on('notifiedUser', function(data) {
     // display a notification for 5 seconds on navbar
     var notif = document.getElementById('notif');

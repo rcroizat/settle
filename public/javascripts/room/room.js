@@ -3,12 +3,15 @@
 var roomId = location.pathname.split('/');
 roomId = roomId[roomId.length - 1];
 
-var url = 'https://settle-alaurelut.c9users.io:8080/';
-if (document.location.hostname == "localhost") {
-    url = 'localhost:3000/';
-}
-var socket = io.connect(url);
-
+// Connexion à socket.io
+// var url = 'https://settle-alaurelut.c9users.io';
+// if (document.location.hostname == "localhost") {
+//     url = 'localhost';
+//     var port = 3000;
+//     var socket = io.connect(url + ':' + port + '/');
+// }else{
+//     var socket = io.connect(url);
+// }
 var user = JSON.parse(window.localStorage['userData'] || '{}');
 
 socket.emit('userConnected', roomId, user);

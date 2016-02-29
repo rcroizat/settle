@@ -1,28 +1,19 @@
-// Connexion à socket.io
-var url = 'https://settle-alaurelut.c9users.io';
-var port = 8080;
-if (document.location.hostname == "localhost") {
-    url = 'localhost';
-    var port = 3000;
-}
-
 var map = {};
+
 // Maximal distance (in meters) to display chat rooms in the list
 map.maxDistance = 1000;
 
-map.socket = io.connect(url + ':' + port + '/');
-
-map.socket.on('chatRoomGet', function(data) {
+socket.on('chatRoomGet', function(data) {
     map.chatRooms = data;
     map.setChatRoomsList(map.chatRooms, map.userPosition);
 });
 
-map.socket.on('newChatRoom', function(data) {
+socket.on('newChatRoom', function(data) {
     map.chatRooms = data;
     map.setChatRoomsList(map.chatRooms, map.userPosition);
 });
 
-map.socket.on('chatRoomUserNumberUpdate', function(data) {
+socket.on('chatRoomUserNumberUpdate', function(data) {
     for (var i = 0; i < map.chatRooms.length; i++) {
         if(map.chatRooms[i]._id === data.roomId){
             map.chatRooms[i].users = data.users;
@@ -92,7 +83,7 @@ map.init = function() {
 
             map.instance.setCenter(pos);
 
-            map.socket.emit('chatRoomGet');
+            socket.emit('chatRoomGet');
 
         }, function() {
             this.handleLocationError(true, infoWindow, map.instance.getCenter());
@@ -135,7 +126,7 @@ map.setChatRoomsList = function(chatRooms, mapCenter, filter) {
 
 map.updateRoomUsers = function(roomId, usersNumber) {
     map.chat
-    $('#' + roomId + ' .users').html(usersNumber + ' Users');
+    $('#' + roomId + ' .users').html(usersNumber);
 }
 
 function initMap() {

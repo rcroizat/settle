@@ -1,5 +1,4 @@
 var app = {};
-app.mode = 'dev';
 
 // SERVER
 app.server = require('./server')(app);
