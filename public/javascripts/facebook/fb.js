@@ -14,13 +14,11 @@ function statusChangeCallback(response) {
         user.getFacebookUser();
 
     } else if (response.status === 'not_authorized') {
-    } else {
+        alert('Not authorized to log in with facebook');
     }
 }
 
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
+// This function is called when someone finishes with the Login Button
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
@@ -31,15 +29,13 @@ function checkLoginState() {
 window.fbAsyncInit = function() {
     FB.init({
         appId: '1716661471913173',
-        cookie: true, // enable cookies to allow the server to access 
-        // the session
+        cookie: true, // enable cookies to allow the server to access the session
         xfbml: true, // parse social plugins on this page
-        version: 'v2.5' // use version 2.2
+        version: 'v2.5' // use version 2.5
     });
 };
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
+// Get user data from facebook
 user.getFacebookUser = function() {
     FB.api('/me', function(response) {
         user.data.name = response.name;
@@ -69,6 +65,7 @@ user.getFacebookFriends = function() {
     );
 };
 
+// When user is logged in, register him in DB and localstorage then redirect him to the map view.
 user.register = function() {
     var url = 'https://settle-alaurelut.c9users.io';
     var port = 8080;

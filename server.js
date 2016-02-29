@@ -14,7 +14,7 @@ module.exports = function(app) {
         _server: null,
         _db:null,
 
-        // Create the server
+        // Create the server then listen on the port and the route
         create: function() {
             this._server = http.createServer(exp);
             this.config();
@@ -42,7 +42,7 @@ module.exports = function(app) {
             exp.use(cookieParser());
             // compression middleware that enable deflate and gzip
             exp.use(compression());
-            // Set the directory that will serve the front end files
+            // Set the directory that will serve the front end files to public
             exp.use(express.static(path.join(__dirname, 'public')));
         },
 

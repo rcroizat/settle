@@ -10,7 +10,7 @@ module.exports = function(app) {
         _db: null,
         _collections: {},
 
-        // Connect to the MongoDB database then load the database and the users and chatRooms collections
+        // Connect to the MongoDB database then load the users and chatRooms collections
         connect: function() {
             MongoClient.connect(this.url, function(err, db) {
                 app.db._db = db;

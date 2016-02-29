@@ -7,7 +7,8 @@ if (document.location.hostname == "localhost") {
 }
 
 var map = {};
-map.maxDistance = 500;
+// Maximal distance (in meters) to display chat rooms in the list
+map.maxDistance = 1000;
 
 map.socket = io.connect(url + ':' + port + '/');
 
@@ -108,7 +109,6 @@ map.setChatRoomsList = function(chatRooms, mapCenter, filter) {
 
     $('#chatRoomList').empty();
 
-
     if ( map.filter !== filter) {
         map.filter = filter;
         chatRooms.sort(function(a, b) {
@@ -145,10 +145,6 @@ function initMap() {
         filtersButton[i].addEventListener('click', filterChatRoomList, false);
     }
 }
-
-
-// filterChatRoomsDistance
-
 
 function filterChatRoomList () {
     map.setChatRoomsList(map.chatRooms, map.instance.getCenter(), this.getAttribute('filter'));

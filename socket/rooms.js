@@ -4,6 +4,7 @@ module.exports = function(app) {
     return {
 
         listen: function(socket) {
+            // Emit all the chat rooms
             socket.on('chatRoomGet', function() {
 				app.rooms.findChatRooms(function(data) {
                     app.socket.io.emit('chatRoomGet', data );

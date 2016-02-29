@@ -26,13 +26,6 @@ socket.on('message', function(data) {
     $(".roomContainer").animate({ scrollTop: $(".roomContainer").height() }, 1000);
 });
 
-socket.on('isTyping', function(pseudo) {
-});
-
-$("#message").keydown(function() {
-    socket.emit('isTyping'); // Istyping
-});
-
 socket.on('userDeconnection', function(id) {
     $('#' + id).remove();
 });
@@ -49,8 +42,6 @@ $('#formulaire_chat').submit(function() {
 
     return false; // Permet de bloquer l'envoi "classique" du formulaire
 });
-
-
 
 // Ajoute un message dans la page
 function insereMessage(date, user, message) {

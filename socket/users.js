@@ -4,16 +4,16 @@ module.exports = function(app) {
     return {
 
         listen: function(socket) {
+            // When a user log in with facebook try to register him in DB then emit the callback to the front end
             socket.on('facebookLogin', function(user) {
                 app.users.registerUser(user, function(data) {
-                    console.log('socket register user');
                     app.socket.io.emit('facebookLogin', data);
                 });
             });
 
+            // Get user notifications
             socket.on('updateNotifications', function(facebookId) {
                 app.users.getUserNotifications(facebookId, function(data) {
-                    console.log('socket register user');
                     app.socket.io.emit('userNewNotifications', data);
                 });
             });
